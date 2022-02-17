@@ -15,16 +15,16 @@ class MasterCardPaymentController extends Controller
 
         // finger print value
         // 243E6992EA467F1CBB9973FACFCC3BF17B5CD007
-        $keypath = 'https://beeptopay.codigosol.co.uk/BeepToPay-sandbox-new.p12';
+        $keypath = 'https://beeptopay.codigosol.co.uk/Test-sandbox.p12';
         // return response()->json(['path' => $keypath]);
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
-            'BeepToPay',
-            'Godisgeat@134'
+            'keyalias',
+            'keystorepassword'
         );
 
         // …
-        $consumerKey = 'WjxVxZ1B0U0ZdINeYSVVJqqIiwo9o4f2GTEXcma3da5c2ec1!87a0dfd5099146ce8a5dd9dc3cbab55d0000000000000000';
+        $consumerKey = 'xekfIwW6tz5XvcmPjp3EKD1v5-y2xiTtpeAkCTsgd15cc079!1aa8e0adf9924009be94e6e93709e2070000000000000000';
         $uri = 'https://sandbox.api.mastercard.com/service';
         $method = 'POST';
         $payload = 'Hello world!';
