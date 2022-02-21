@@ -19,5 +19,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// Testing Routes
 Route::post('/check-api', [MasterCardPaymentController::class, 'index']);
+
+/* MasterCard Routes */
+Route::post('/tokenize', [MasterCardPaymentController::class, 'tokenize']);
+Route::post('/notifyTokenUpdated', [MasterCardPaymentController::class, 'notifyTokenUpdated']);
+Route::post('/transact', [MasterCardPaymentController::class, 'transact']);
+Route::get('/getAsset', [MasterCardPaymentController::class, 'getAsset']);
+Route::post('/suspend', [MasterCardPaymentController::class, 'suspend']);
+Route::post('/unSuspend', [MasterCardPaymentController::class, 'unSuspend']);
+Route::post('/delete', [MasterCardPaymentController::class, 'delete']);
+Route::post('/getTaskStatus', [MasterCardPaymentController::class, 'getTaskStatus']);
+Route::post('/searchTokens', [MasterCardPaymentController::class, 'searchTokens']);
+Route::post('/getToken', [MasterCardPaymentController::class, 'getToken']);
+
