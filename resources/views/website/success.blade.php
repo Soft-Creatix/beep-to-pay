@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group text-center mt-4">
 
-                            <a href="payment-card.html" type="submit" class="btn-royalblue">Save</a>
+                            <a href="{{ route('website.payment-card') }}" type="submit" class="btn-royalblue">Save</a>
                         </div>
 
                     </form>

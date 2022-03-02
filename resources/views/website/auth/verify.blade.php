@@ -61,7 +61,7 @@
                           </div>
                         <div class="form-group text-center mt-4">
 
-                            <a href="horay.html" class="royal-blue font_16">Resend OTP</a>
+                            <a href="{{ route('website.success') }}" class="royal-blue font_16">Resend OTP</a>
                         </div>
 
                     </form>

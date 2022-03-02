@@ -43,8 +43,8 @@ Route::get('logout', [App\Http\Controllers\Website\Auth\LoginController::class, 
 Route::get('password/reset', [App\Http\Controllers\Website\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
 // Website Controller Routes.....
-Route::get('dashboard', [App\Http\Controllers\Website\WebsiteController::class, 'index'])->name('website.index');
-Route::get('hurray', [App\Http\Controllers\Website\WebsiteController::class, 'hurray'])->name('website.hurray');
+Route::get('dashboard', [App\Http\Controllers\Website\WebsiteController::class, 'dashboard'])->name('website.dashboard');
+Route::get('success', [App\Http\Controllers\Website\WebsiteController::class, 'success'])->name('website.success');
 Route::get('payment-card', [App\Http\Controllers\Website\WebsiteController::class, 'paymentCard'])->name('website.payment-card');
 Route::get('remove-card', [App\Http\Controllers\Website\WebsiteController::class, 'removeCard'])->name('website.remove-card');
 Route::get('receipt', [App\Http\Controllers\Website\WebsiteController::class, 'receipt'])->name('website.receipt');

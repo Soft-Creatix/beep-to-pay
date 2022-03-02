@@ -33,7 +33,7 @@
 
                 <div class="form-group text-center mt-4">
 
-                    <a type="submit" href="dashboard.html" class="btn-royalblue">Save Card</a>
+                    <a type="submit" href="{{ route('website.dashboard') }}" class="btn-royalblue">Save Card</a>
                 </div>
                 <div class="form-group text-center">
 

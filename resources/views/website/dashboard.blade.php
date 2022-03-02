@@ -21,7 +21,7 @@
                             <div class="text-center">
                                 <img src="{{asset('website/images/card__box.png')}}" class="img-fluid card-img" alt="">
                                 <div class="mt-2">
-                                    <a href="remove-card.html" class="font_14 royal-blue">Remove Card</a>
+                                    <a href="{{ route('website.remove-card') }}" class="font_14 royal-blue">Remove Card</a>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="container form-container" style="padding: 1% 10% !important;">
 
-                    <a href="receipt.html">
+                    <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
                                 <img src="{{asset('website/images/res_1.png')}}" class="img-fluid res-img" alt="">
@@ -57,7 +57,7 @@
 
                         </div>
                     </a>
-                    <a href="receipt.html">
+                    <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
                                 <img src="{{asset('website/images/res_2.png')}}" class="img-fluid res-img" alt="">
@@ -71,7 +71,7 @@
 
                         </div>
                     </a>
-                    <a href="receipt.html">
+                    <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
                                 <img src="{{asset('website/images/res_3.png')}}" class="img-fluid res-img" alt="">
@@ -91,7 +91,7 @@
                 </div>
                 <div class="container form-container" style="padding: 1% 10% !important;">
 
-                    <a href="receipt.html">
+                    <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
                                 <img src="{{asset('website/images/res_1.png')}}" class="img-fluid res-img" alt="">

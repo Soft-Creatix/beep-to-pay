@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group text-center mt-4">
 
-                    <a href="confirm-info.html" type="submit" class="btn-royalblue">Save Card</a>
+                    <a href="{{ route('website.confirm-info') }}" type="submit" class="btn-royalblue">Save Card</a>
                 </div>
 
             </form>
