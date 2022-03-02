@@ -23,7 +23,7 @@
                     'identity_card' => $data['identity_card'],
                     'dob' => $data['dob'],
                     'gender' => Hash::make($data['gender']), --}}
-                    <img src="{{ asset('website/images/company-logo.svg') }}" class="img-fluid" alt="BeepToPay">
+                    <img src="{{ asset('website/images/company-logo.png') }}" class="img-fluid" alt="BeepToPay">
                     <h3 class="font_18 font-weight-bold mt-4">Registration</h3>
                     <p class="font_15">To get started, we just need a few things from you, and we promise they are
                         kept confidential.</p>

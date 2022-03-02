@@ -16,14 +16,14 @@
             <div class="col-12 p-0">
                 <div class="container form-container">
                     <a href="#">
-                        <img src="{{asset('website/images/Arrow.svg')}}" class="img-fluid" alt="">
+                        <img src="{{asset('website/images/arrow.png')}}" class="img-fluid" alt="">
                     </a>
                     <div class="row mt-3">
                         <div class="col-12">
                             <h5 class="font_16 greyee font-weight-bold">Receipt</h5>
 
                             <div class="text-center mt-5">
-                                <img src="{{asset('website/images/res-logo.svg" alt="">
+                                <img src="{{asset('website/images/res-logo.png" alt="">
 
                                 <h3 class="font_16 greyee mt-3">The Coffee Bean & Tea Leaf</h3>
 

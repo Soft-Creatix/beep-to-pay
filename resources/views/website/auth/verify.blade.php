@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-lg navbar-light nav-bg px-3 py-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="{{asset('website/images/beeptopay-logo.svg')}}" class="img-fluid" alt="" />
+                    <img src="{{asset('website/images/beeptopay-logo.png')}}" class="img-fluid" alt="" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-12 p-0">
                    <div class="container form-container h_100">
-                    <img src="{{asset('website/images/company-logo.svg')}}" class="img-fluid" alt="BeepToPay">
+                    <img src="{{asset('website/images/company-logo.png')}}" class="img-fluid" alt="BeepToPay">
                     <h3 class="font_18 font-weight-bold mt-4">Verify your phone number</h3>
                     <p class="font_15">We sent you an OTP to your phone number. Enter the code below to continue.</p>
                     <form action="#" class="mt-4 w-60 p-4">

@@ -16,12 +16,12 @@
             <div class="col-12 p-0">
                 <div class="container form-container h_100" style="padding: 1.5% 10% !important;">
                     <a href="#">
-                        <img src="{{asset('website/images/Arrow.svg')}}" class="img-fluid" alt="">
+                        <img src="{{asset('website/images/arrow.png')}}" class="img-fluid" alt="">
                     </a>
                     <div class="row mt-3">
                         <div class="col-lg-6 col-md-12 col-12 ">
                             <div class="text-left position-relative">
-                                <img src="{{asset('website/images/card__box.svg')}}" class="img-fluid card-img" alt="">
+                                <img src="{{asset('website/images/card__box.png')}}" class="img-fluid card-img" alt="">
                                 <div class="card-absolute">
                                     <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
                                     <p class="font_18 text-white">Muhammad ***</p>

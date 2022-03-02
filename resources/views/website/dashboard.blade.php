@@ -19,7 +19,7 @@
                     <div class="row mt-3">
                         <div class="col-6">
                             <div class="text-center">
-                                <img src="{{asset('website/images/card__box.svg')}}" class="img-fluid card-img" alt="">
+                                <img src="{{asset('website/images/card__box.png')}}" class="img-fluid card-img" alt="">
                                 <div class="mt-2">
                                     <a href="remove-card.html" class="font_14 royal-blue">Remove Card</a>
                                 </div>
@@ -28,7 +28,7 @@
                         <div class="col-6 add-card">
                             <div>
                                 <button class="button-unset">
-                                    <img src="{{asset('website/images/Add.svg')}}" class="img-fluid" alt="">
+                                    <img src="{{asset('website/images/add.png')}}" class="img-fluid" alt="">
                                     <br>
                                     <span class="font_14 greyee">Add new card</span>
                                 </button>
@@ -46,7 +46,7 @@
                     <a href="receipt.html">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_1.svg')}}" class="img-fluid res-img" alt="">
+                                <img src="{{asset('website/images/res_1.png')}}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
                                     Coffee Bean & Tea Leaf</span></div>
@@ -60,7 +60,7 @@
                     <a href="receipt.html">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_2.svg')}}" class="img-fluid res-img" alt="">
+                                <img src="{{asset('website/images/res_2.png')}}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span
                                     class="font_14 greyee">KFC</span></div>
@@ -74,7 +74,7 @@
                     <a href="receipt.html">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_3.svg')}}" class="img-fluid res-img" alt="">
+                                <img src="{{asset('website/images/res_3.png')}}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">Excapade
                                     Sushi</span></div>
@@ -94,7 +94,7 @@
                     <a href="receipt.html">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_1.svg')}}" class="img-fluid res-img" alt="">
+                                <img src="{{asset('website/images/res_1.png')}}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
                                     Coffee Bean & Tea Leaf</span></div>

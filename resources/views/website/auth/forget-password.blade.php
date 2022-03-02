@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-12">
             <div class="pad-first">
-                <img src="{{asset('website/images/company-logo.svg')}}" class="img-fluid mb-2" alt="BeepToPay" />
+                <img src="{{asset('website/images/company-logo.png')}}" class="img-fluid mb-2" alt="BeepToPay" />
                 <h3 class="pay-heading">Pay with Us</h3>
                 <p class="title-p">One click secure payments under your fingertips</p>
             </div>

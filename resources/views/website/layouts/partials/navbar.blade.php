@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light nav-bg px-3 py-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="{{ asset('website/images/beeptopay-logo.svg') }}" class="img-fluid" alt="" />
+            <img src="{{ asset('website/images/beeptopay-logo.png') }}" class="img-fluid" alt="" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12 p-0">
                 <div class="container form-container h_100">
-                    <img src="{{asset('website/images/company-logo.svg')}}" class="img-fluid" alt="BeepToPay">
+                    <img src="{{asset('website/images/company-logo.png')}}" class="img-fluid" alt="BeepToPay">
                     <h3 class="font_18 font-weight-bold mt-4">Verify your phone number</h3>
 
                     <div class="spinner-border mt-5" role="status">
