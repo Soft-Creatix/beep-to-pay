@@ -16,7 +16,7 @@ class UpdateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone_number')->unique()->nullable();
             $table->string('identity_card')->unique()->nullable();
-            $table->timestamp('dob')->nullable();
+            $table->date('dob')->nullable();
             $table->string('gender')->nullable();
         });
     }
