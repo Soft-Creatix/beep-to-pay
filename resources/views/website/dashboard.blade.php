@@ -13,7 +13,7 @@
 @section('content')
     <div class="container mb-5-p">
         <div class="row">
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 mt-5 mb-5">
                 <div class="container form-container" style="padding: 1.5% 10% !important;">
                     <h3 class="font_16 font-weight-bold mt-3">My Cards</h3>
                     <div class="row mt-3">

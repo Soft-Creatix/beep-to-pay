@@ -13,7 +13,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 mt-5 mb-5">
                 <div class="container form-container h_100">
                     <img src="{{asset('website/images/company-logo.png')}}" class="img-fluid" alt="BeepToPay">
                     <h3 class="font_18 font-weight-bold mt-4">Hooray! One last step</h3>

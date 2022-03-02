@@ -13,7 +13,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 mt-5 mb-5">
                 <div class="container form-container">
                     <a href="#">
                         <img src="{{asset('website/images/arrow.png')}}" class="img-fluid" alt="">
