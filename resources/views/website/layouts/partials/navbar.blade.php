@@ -14,12 +14,12 @@
             </div>
             <div class="d-flex">
                 @guest
-                <a href="{{ route('website.login') }}" class="login-btn mr-3">LOG IN</a>
-                <a href="{{ route('website.register') }}" class="btn-signup">SIGN UP</a>
+                    <a href="{{ route('website.login') }}" class="login-btn mr-3">LOG IN</a>
+                    <a href="{{ route('website.register') }}" class="btn-signup">SIGN UP</a>
                 @endguest
                 @auth
-                <a href="#" class="font_14 font-weight-bold text-a-black mr-5">WELCOME, {{ Auth::user()->name }}</a>
-                <a href="{{ route('website.logout') }}" class="login-btn mr-3">LOG OUT</a>
+                    <a href="#" class="font_14 font-weight-bold text-a-black mr-5">WELCOME, {{ Auth::user()->name }}</a>
+                    <a href="{{ route('website.logout') }}" class="login-btn mr-3">LOG OUT</a>
                 @endauth
             </div>
         </div>
