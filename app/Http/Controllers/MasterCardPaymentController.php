@@ -14,7 +14,7 @@ class MasterCardPaymentController extends Controller
     public function index() {
         // finger print value
         // 243E6992EA467F1CBB9973FACFCC3BF17B5CD007
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -84,7 +84,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function tokenize(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -162,7 +162,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function notifyTokenUpdated(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -243,7 +243,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function transact(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -276,7 +276,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function getAsset() {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -302,7 +302,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function suspend(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -337,7 +337,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function unSuspend(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -372,7 +372,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function delete(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -407,7 +407,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function getTaskStatus(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -439,7 +439,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function searchTokens(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
@@ -501,7 +501,7 @@ class MasterCardPaymentController extends Controller
     }
 
     public function getToken(Request $request) {
-        $keypath = 'https://codigosol.net/BeepToPay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
