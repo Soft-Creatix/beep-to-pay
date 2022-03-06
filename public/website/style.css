@@ -204,7 +204,7 @@ margin-top: 1px;
 }
 .absolute-eye  {
     position: absolute;
-    top: 26%;
+    top: 25%;
     right: 4%;
 }
 .footer-fixed {
@@ -232,7 +232,7 @@ select {
     background: #FFFFFF;
     border: 1px solid #707F8D ;
     border-radius: 5px 0px 0px 5px !important;
-    padding: 12px 15px !important;
+    padding: 9px 15px !important;
     border-right: none;
     color: #707F8D !important;
 }
@@ -296,10 +296,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .font_12 {
     font-weight: normal;
-font-size: 12px;
-line-height: 14px;
-
-color: #686868;
+    font-size: 12px;
+    line-height: 14px;
+    color: #686868;
 }
 .res-img {
     border: 1px solid #EDEDED;
@@ -375,4 +374,16 @@ color: #686868;
 }
 .mb-5-p {
     margin-bottom: 5%;
+}
+label.error::before {
+    content: "- ";
+}
+label.error {
+    color: rgb(198, 56, 56);
+    font-size: small;
+}
+@media only screen and (max-width: 600px) {
+    /* .code-select {
+        padding: 12px 15px !important;
+    } */
 }

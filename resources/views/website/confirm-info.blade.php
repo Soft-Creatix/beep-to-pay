@@ -1,4 +1,4 @@
-{{--  --}}
+
 
 @extends('website.layouts.app')
 
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group text-center">
 
-                    <a href="#" class="royal-blue font_16">Cancel and return</a>
+                    <a href="{{ route('login') }}" class="royal-blue font_16">Cancel and return</a>
                 </div>
 
             </form>
@@ -51,6 +51,6 @@
 
 @endpush
 
-{{--  --}}
+
 
 
