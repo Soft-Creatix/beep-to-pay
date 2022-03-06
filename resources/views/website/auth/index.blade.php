@@ -26,7 +26,7 @@
                   @endif
                </div>
                <div class="form-group position-relative">
-                  <input type="password" id="password" name="password" class="form-control input-field" placeholder="Password" data-rule-required="true" data-msg-required="Please enter a password" />
+                  <input type="password" id="password" name="password" value="{{ old('password') }}" class="form-control input-field" placeholder="Password" data-rule-required="true" data-msg-required="Please enter a password" />
                   <div class="absolute-eye">
                      <a href="javascript:;" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
                         aria-hidden="true"></i></a>
