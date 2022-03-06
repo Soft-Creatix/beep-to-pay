@@ -19,10 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 /**Playing with master card OAuth */
 Route::get('master-card', [MasterCardPaymentController::class, 'index']);
-
 
 Route::get('/', function () {
     return redirect(route('website.login'));
@@ -43,6 +41,7 @@ Route::get('logout', [App\Http\Controllers\Website\Auth\LoginController::class, 
 Route::get('password/reset', [App\Http\Controllers\Website\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
 // Website Controller Routes.....
+Route::get('verifyOTP', [App\Http\Controllers\Website\VerificationController::class, 'verifyOTP'])->name('website.verifyOTP');
 Route::get('dashboard', [App\Http\Controllers\Website\WebsiteController::class, 'dashboard'])->name('website.dashboard');
 Route::get('success', [App\Http\Controllers\Website\WebsiteController::class, 'success'])->name('website.success');
 Route::get('payment-card', [App\Http\Controllers\Website\WebsiteController::class, 'paymentCard'])->name('website.payment-card');

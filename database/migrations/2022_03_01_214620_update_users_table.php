@@ -19,6 +19,7 @@ class UpdateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('gender')->nullable();
             $table->string('is_verified')->nullable();
+            $table->string('phone_otp')->nullable();
         });
     }
 
@@ -35,6 +36,7 @@ class UpdateUsersTable extends Migration
             $table->dropColumn('dob');
             $table->dropColumn('gender');
             $table->dropColumn('is_verified');
+            $table->dropColumn('phone_otp');
         });
     }
 }
