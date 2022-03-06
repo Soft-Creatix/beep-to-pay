@@ -9,6 +9,8 @@
     <meta name="description" content="@yield('meta_description')" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="{{ url()->current() }}" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="{{ asset('website/style.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
