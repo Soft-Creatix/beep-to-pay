@@ -18,6 +18,7 @@ class UpdateUsersTable extends Migration
             $table->string('identity_card')->unique()->nullable();
             $table->date('dob')->nullable();
             $table->string('gender')->nullable();
+            $table->string('is_verified')->nullable();
         });
     }
 
@@ -28,6 +29,12 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('phone_number');
+            $table->dropColumn('identity_card');
+            $table->dropColumn('dob');
+            $table->dropColumn('gender');
+            $table->dropColumn('is_verified');
+        });
     }
 }

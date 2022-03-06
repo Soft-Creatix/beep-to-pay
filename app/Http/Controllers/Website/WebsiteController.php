@@ -9,7 +9,7 @@ class WebsiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:web');
+        $this->middleware(['auth:web', 'user.verified']);
     }
 
     public function dashboard()

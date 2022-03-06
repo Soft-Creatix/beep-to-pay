@@ -12,7 +12,7 @@
                 <a href="#" class="font_14 font-weight-bold text-a-black mr-5">HOW TO USE</a>
                 <a href="#" class="font_14 font-weight-bold text-a-black">WHERE TO USE</a>
             </div>
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 @guest
                     <a href="{{ route('website.login') }}" class="login-btn mr-3">LOG IN</a>
                     <a href="{{ route('website.register') }}" class="btn-signup">SIGN UP</a>
