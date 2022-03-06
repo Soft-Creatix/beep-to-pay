@@ -17,13 +17,19 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
          <div class="pad-second">
+            @if ($errors->has('email'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{-- <strong>Error!</strong> --}}
+                    {{ $errors->first('email') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <form method="POST" action="{{ route('login') }}" id="loginForm">
                @csrf
                <div class="form-group">
                   <input type="email" name="email" value="{{ old('email') }}" class="form-control input-field" placeholder="Email or Phone Number" data-rule-required="true" data-rule-email="true" data-msg-required="Please enter your email address" data-msg-email="Please enter a valid email address" />
-                  @if ($errors->has('email'))
-                  <label class="error" for="email">{{ $errors->first('email') }}</label>
-                  @endif
                </div>
                <div class="form-group position-relative">
                   <input type="password" id="password" name="password" value="{{ old('password') }}" class="form-control input-field" placeholder="Password" data-rule-required="true" data-msg-required="Please enter a password" />
