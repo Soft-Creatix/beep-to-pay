@@ -77,7 +77,10 @@
    }
 
    $(document).ready(function() {
-        $("#loginForm").validate();
+        $("#loginForm").validate({
+            errorClass: "is-invalid",
+            validClass: "is-valid"
+        });
    });
 </script>
 @endpush

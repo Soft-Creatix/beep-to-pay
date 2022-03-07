@@ -40,7 +40,10 @@
 @push('scripts')
 <script type="text/javascript">
    $(document).ready(function() {
-       $("#OTPForm").validate();
+       $("#OTPForm").validate({
+            errorClass: "is-invalid",
+            validClass: "is-valid"
+        });
    });
 
    $('#el').focus();
