@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MasterCardPaymentController;
 use App\Http\Controllers\Website\Auth\ForgotPasswordController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/date', function () {
+    $date = '08-02-2022';
+    $date = Carbon::parse($date);
+    $date = $date->format('Y-m-d');
+    return $date;
 });
 
 /**Playing with master card OAuth */

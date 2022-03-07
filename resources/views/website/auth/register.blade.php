@@ -45,10 +45,10 @@
                   <input type="text" name="name" value="{{ old('name') }}" class="form-control input-field" placeholder="Name" data-rule-required="true" data-msg-required="Please enter a name" />
                </div>
                <div class="form-group">
-                  <input type="email" name="email" value="{{ old('email') }}" class="form-control input-field" placeholder="Email" data-rule-required="true" data-rule-email="true" data-msg-required="Please enter your email address" data-msg-email="Please enter a valid email address" />
+                  <input type="email" name="email" value="{{ old('email') }}" autocomplete="off" class="form-control input-field" placeholder="Email" data-rule-required="true" data-rule-email="true" data-msg-required="Please enter your email address" data-msg-email="Please enter a valid email address" />
                </div>
                <div class="form-group position-relative">
-                  <input type="password" name="password" value="{{ old('password') }}" class="form-control input-field" id="myInput"
+                  <input type="password" name="password" value="{{ old('password') }}" autocomplete="off" class="form-control input-field" id="myInput"
                      placeholder="Password" data-rule-required="true" data-rule-minlength="8" data-rule-pwcheck="true" data-msg-required="Please enter a password" />
                   <div class="absolute-eye-register">
                      <a href="javascript:;" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
@@ -56,7 +56,7 @@
                   </div>
                </div>
                <div class="form-group position-relative">
-                  <input type="password" name="confirm_password" value="{{ old('confirm_password') }}" class="form-control input-field"
+                  <input type="password" name="confirm_password" value="{{ old('confirm_password') }}" autocomplete="off" class="form-control input-field"
                      placeholder="Confirm Password" id="myInput1" data-rule-required="true" data-msg-required="Please enter a confirm password" />
                      <div class="absolute-eye-register1">
                         <a href="javascript:;" onclick="event.preventDefault(); myFunction1();"><i class="fa fa-eye eyeIcon"
@@ -86,11 +86,8 @@
                </div>
                <div class="form-group">
                   <!-- <input type="date" class="form-control input-field" placeholder="Date of Birth" /> -->
-                  <input placeholder="Date of Birth" name="dob" value="{{ old('dob') }}" class="form-control input-field" type="date"
-                     onfocus="(this.type='date')" id="date" style="display: flex;
-                     justify-content: center;
-                     align-items: center;
-                     margin: auto;" data-rule-required="true" data-msg-required="Please enter the date of birth">
+                  <input placeholder="Date of Birth" id="dob" name="dob" value="{{ old('dob') }}" class="form-control input-field" type="text"
+                   data-rule-required="true" data-msg-required="Please enter the date of birth" value="">
                </div>
                <div class="form-group">
                   {{-- <input type="text" name="gender" value="{{ old('gender') }}" class="form-control input-field" placeholder="Gender" data-rule-required="true" data-msg-required="Please enter a gender" /> --}}
@@ -137,6 +134,9 @@
    }
 
    $(document).ready(function() {
+        $(function() {
+            $( "#dob" ).datepicker({ dateFormat: 'dd-mm-yy', maxDate: '0'});
+        });
         $.validator.addMethod("pwcheck", function(value) {
             return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
                 && /[a-z]/.test(value) // has a lowercase letter
