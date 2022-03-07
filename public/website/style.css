@@ -377,10 +377,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .mb-5-p {
     margin-bottom: 5%;
 }
-label.error::before {
+label.is-invalid::before {
     content: '\25CF   ';
 }
-label.error {
+label.is-invalid {
     color: rgb(198, 56, 56);
     font-size: small;
 }
