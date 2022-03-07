@@ -16,14 +16,12 @@
       <div class="col-12 p-0 mt-5 mb-5">
          <div class="container form-container">
             @if($errors->any())
-                <div class="alert alert-danger alert-dismissible text-center">
+                <div class="alert alert-danger alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <p><strong>Error!</strong></p>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                    @foreach ($errors->all() as $error)
+                        <p>&#9679; {{ $error }}</p>
+                    @endforeach
                 </div>
             @endif
             {{-- 'name' => $data['name'],
@@ -89,8 +87,13 @@
                      margin: auto;" data-rule-required="true" data-msg-required="Please enter the date of birth">
                </div>
                <div class="form-group">
-                  <input type="text" name="gender" value="{{ old('gender') }}" class="form-control input-field" placeholder="Gender" data-rule-required="true" data-msg-required="Please enter a gender" />
-               </div>
+                  {{-- <input type="text" name="gender" value="{{ old('gender') }}" class="form-control input-field" placeholder="Gender" data-rule-required="true" data-msg-required="Please enter a gender" /> --}}
+                    <select name="gender" class="form-control">
+                        <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                        <option value="Others" {{ old('gender') == 'Others' ? 'selected' : '' }}>Others</option>
+                    </select>
+                </div>
                <div class="form-group">
                   <input type="submit" class="btn-royalblue" value="Register Now" />
                </div>
