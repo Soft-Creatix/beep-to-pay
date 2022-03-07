@@ -50,7 +50,7 @@
                <div class="form-group position-relative">
                   <input type="password" name="password" value="{{ old('password') }}" class="form-control input-field" id="myInput"
                      placeholder="Password" data-rule-required="true" data-rule-minlength="8" data-rule-pwcheck="true" data-msg-required="Please enter a password" />
-                  <div class="absolute-eye">
+                  <div class="absolute-eye-register">
                      <a href="javascript:;" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
                         aria-hidden="true"></i></a>
                   </div>
@@ -58,7 +58,7 @@
                <div class="form-group position-relative">
                   <input type="password" name="confirm_password" value="{{ old('confirm_password') }}" class="form-control input-field"
                      placeholder="Confirm Password" id="myInput1" data-rule-required="true" data-msg-required="Please enter a confirm password" />
-                     <div class="absolute-eye">
+                     <div class="absolute-eye-register1">
                         <a href="javascript:;" onclick="event.preventDefault(); myFunction1();"><i class="fa fa-eye eyeIcon"
                            aria-hidden="true"></i></a>
                      </div>

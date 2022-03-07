@@ -201,7 +201,17 @@ margin-top: 1px;
     color: #686868;
     font-size: 20px !important;
 }
-.absolute-eye  {
+.absolute-eye-login  {
+    position: absolute;
+    top: 20%;
+    right: 7%;
+}
+.absolute-eye-register  {
+    position: absolute;
+    top: 18%;
+    right: 7%;
+}
+.absolute-eye-register1  {
     position: absolute;
     top: 18%;
     right: 7%;
