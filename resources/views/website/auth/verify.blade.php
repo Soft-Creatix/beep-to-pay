@@ -11,7 +11,7 @@
       <div class="col-12 p-0 mt-5 mb-5">
          <div class="container form-container h_75">
             @if(session()->has('error'))
-                <div class="alert alert-danger alert-dismissible text-center">
+                <div class="alert alert-danger alert-dismissible text-center mr-2">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>Error!</strong> {!! session('error') !!}
                 </div>
@@ -22,12 +22,12 @@
             <form action="{{ route('website.verifyOTP') }}" method="post" class="mt-4 w-60 p-4" id="OTPForm">
                 @csrf
                <div class="d-flex bd-highlight">
-                  <div class="p-2 flex-fill bd-highlight"><input type="text" name="otp1" class="form-control input-field text-center" placeholder="0" /></div>
-                  <div class="p-2 flex-fill bd-highlight"><input type="text" name="otp2" class="form-control input-field text-center" placeholder="0" /></div>
-                  <div class="p-2 flex-fill bd-highlight"><input type="text" name="otp3" class="form-control input-field text-center" placeholder="0" /></div>
-                  <div class="p-2 flex-fill bd-highlight"><input type="text" name="otp4" class="form-control input-field text-center" placeholder="0" /></div>
+                  <input type="number" min="0" maxlength="1" name="otp1" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="number" min="0" maxlength="1" name="otp2" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="number" min="0" maxlength="1" name="otp3" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="number" min="0" maxlength="1" name="otp4" class="form-control input-field text-center mr-2" placeholder="0" />
                </div>
-               <div class="form-group text-center mt-4">
+               <div class="form-group text-center mr-2 mt-4">
                   <a href="javascript:;" class="royal-blue font_16">Resend OTP</a>
                </div>
                <input type="submit" class="btn-royalblue" />
@@ -42,5 +42,18 @@
    $(document).ready(function() {
        $("#OTPForm").validate();
    });
+
+   $('#el').focus();
+
+   var elements = document.getElementsByClassName('input-field')
+    Array.from(elements).forEach(function(element){
+        element.addEventListener("keyup", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13 || element.value.length == 1) {
+                // Focus on the next sibling
+                element.nextElementSibling.focus();
+            }
+        });
+    });
 </script>
 @endpush
