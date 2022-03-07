@@ -28,7 +28,7 @@
                   <input type="number" min="0" maxlength="1" name="otp4" class="form-control input-field text-center mr-2" placeholder="0" />
                </div>
                <div class="form-group text-center mr-2 mt-4">
-                  <a href="javascript:;" class="royal-blue font_16">Resend OTP</a>
+                  <a href="javascript:;" class="royal-blue font_16" onclick="resendOTP()">Resend OTP</a>
                </div>
                <input type="submit" class="btn-royalblue" />
             </form>
@@ -55,5 +55,13 @@
             }
         });
     });
+
+    function resendOTP() {
+        $.get(`{{ route('website.resendOTP') }}`, function( data ) {
+            // $( ".result" ).html( data );
+            // alert( "Load was performed." );
+        });
+
+    }
 </script>
 @endpush

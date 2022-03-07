@@ -43,6 +43,7 @@ Route::get('password/reset', [App\Http\Controllers\Website\Auth\ForgotPasswordCo
 // Website Controller Routes.....
 Route::get('verification', [App\Http\Controllers\Website\VerificationController::class, 'verification'])->name('website.verification');
 Route::post('verifyOTP', [App\Http\Controllers\Website\VerificationController::class, 'verifyOTP'])->name('website.verifyOTP');
+Route::get('resendOTP', [App\Http\Controllers\Website\VerificationController::class, 'resendOTP'])->name('website.resendOTP');
 Route::get('dashboard', [App\Http\Controllers\Website\WebsiteController::class, 'dashboard'])->name('website.dashboard');
 Route::get('success', [App\Http\Controllers\Website\WebsiteController::class, 'success'])->name('website.success');
 Route::get('payment-card', [App\Http\Controllers\Website\WebsiteController::class, 'paymentCard'])->name('website.payment-card');

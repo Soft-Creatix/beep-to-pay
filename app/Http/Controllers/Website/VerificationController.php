@@ -57,4 +57,22 @@ class VerificationController extends Controller
 
     }
 
+    public function resendOTP(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        $phoneVerificationCode = $user->phone_otp;
+        $user->phone_otp = $phoneVerificationCode;
+        $user->save();
+
+        $messageText = "Your verification code is: " . $phoneVerificationCode;
+        $smsApiKey = env('SMS_API_KEY' , 'C20028525e987cee08a299.44558809');
+        $phone_number = $user->phone_number;
+
+        Http::get("http://www.elitbuzz-me.com/sms/smsapi?api_key=$smsApiKey&type=text&contacts=$phone_number&senderid=MyRide&msg=$messageText");
+
+        return 'true';
+    }
+
 }
