@@ -18,10 +18,12 @@
             @if($errors->any())
                 <div class="alert alert-danger alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <p><strong>Error!</strong></p>
-                    @foreach ($errors->all() as $error)
-                        <p>&#9679; {{ $error }}</p>
-                    @endforeach
+                    <p class="m-0"><strong>Error!</strong></p>
+                    <ul class="m-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
             {{-- 'name' => $data['name'],
@@ -80,7 +82,7 @@
                </div>
                <div class="form-group">
                   <!-- <input type="date" class="form-control input-field" placeholder="Date of Birth" /> -->
-                  <input placeholder="Date of Birth" name="dob" value="{{ old('dob') }}" class="form-control input-field" type="text"
+                  <input placeholder="Date of Birth" name="dob" value="{{ old('dob') }}" class="form-control input-field" type="date"
                      onfocus="(this.type='date')" id="date" style="display: flex;
                      justify-content: center;
                      align-items: center;
