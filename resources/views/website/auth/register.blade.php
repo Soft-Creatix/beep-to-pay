@@ -17,7 +17,7 @@
          <div class="container form-container">
             @if($errors->any())
                 <div class="alert alert-danger alert-dismissible">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <a href="javascript:;" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <p class="m-0"><strong>Error!</strong></p>
                     <ul class="m-0">
                         @foreach ($errors->all() as $error)
@@ -51,13 +51,17 @@
                   <input type="password" name="password" value="{{ old('password') }}" class="form-control input-field" id="myInput"
                      placeholder="Password" data-rule-required="true" data-rule-minlength="8" data-rule-pwcheck="true" data-msg-required="Please enter a password" />
                   <div class="absolute-eye">
-                     <a href="#" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
+                     <a href="javascript:;" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
                         aria-hidden="true"></i></a>
                   </div>
                </div>
-               <div class="form-group">
+               <div class="form-group position-relative">
                   <input type="password" name="confirm_password" value="{{ old('confirm_password') }}" class="form-control input-field"
-                     placeholder="Confirm Password" data-rule-required="true" data-msg-required="Please enter a confirm password" />
+                     placeholder="Confirm Password" id="myInput1" data-rule-required="true" data-msg-required="Please enter a confirm password" />
+                     <div class="absolute-eye">
+                        <a href="javascript:;" onclick="event.preventDefault(); myFunction1();"><i class="fa fa-eye eyeIcon"
+                           aria-hidden="true"></i></a>
+                     </div>
                </div>
                <div class="form-group">
                   <div class="d-flex bd-highlight">
@@ -120,6 +124,18 @@
            x.type = "password";
        }
    }
+
+   function myFunction1() {
+       var x = document.getElementById("myInput1");
+       if (x.type === "password") {
+           $(".eyeIcon").toggleClass("fa-eye-slash");
+           x.type = "text";
+       } else {
+           $(".eyeIcon").toggleClass("fa-eye-slash");
+           x.type = "password";
+       }
+   }
+
    $(document).ready(function() {
         $.validator.addMethod("pwcheck", function(value) {
             return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
@@ -127,7 +143,10 @@
                 && /\d/.test(value) // has a digit
         });
         $.validator.messages.pwcheck = "Password can only be uppercase, lowercase, special characters(=!\-@._*) and digits";
-        $("#registerForm").validate();
+        $("#registerForm").validate({
+            errorClass: "is-invalid",
+            validClass: "is-valid"
+        });
    });
 </script>
 @endpush

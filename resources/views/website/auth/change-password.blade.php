@@ -27,7 +27,7 @@
                             <input type="password" class="form-control input-field" id="myInput"
                                 placeholder="Old Password" />
                             <div class="absolute-eye">
-                                <a href="#" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
+                                <a href="javascript:;" onclick="event.preventDefault(); myFunction();"><i class="fa fa-eye eyeIcon"
                                         id="eyeIcon" aria-hidden="true"></i></a>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <input type="password" class="form-control input-field" id="myInput2"
                                 placeholder="New Password" />
                             <div class="absolute-eye">
-                                <a href="#" onclick="event.preventDefault(); myFunction2();"><i class="fa fa-eye eyeIcon"
+                                <a href="javascript:;" onclick="event.preventDefault(); myFunction2();"><i class="fa fa-eye eyeIcon"
                                         id="eyeIcon2" aria-hidden="true"></i></a>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <input type="password" class="form-control input-field" id="myInput3"
                                 placeholder="Confirm Password" />
                             <div class="absolute-eye">
-                                <a href="#" onclick="event.preventDefault(); myFunction3();"><i class="fa fa-eye eyeIcon"
+                                <a href="javascript:;" onclick="event.preventDefault(); myFunction3();"><i class="fa fa-eye eyeIcon"
                                         id="eyeIcon3" aria-hidden="true"></i></a>
                             </div>
                         </div>

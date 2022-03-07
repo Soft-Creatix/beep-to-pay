@@ -17,7 +17,7 @@
            <div class="container form-container h_100">
 
 
-            <form action="#" class="w-60">
+            <form action="javascript:;" class="w-60">
 
                 <h4 class="font_16 font-weight-bold">Add Debit or Credit Card!</h4>
                 <div class="form-group mt-3">

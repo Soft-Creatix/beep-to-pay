@@ -203,8 +203,8 @@ margin-top: 1px;
 }
 .absolute-eye  {
     position: absolute;
-    top: 25%;
-    right: 4%;
+    top: 18%;
+    right: 7%;
 }
 .footer-fixed {
     bottom: 0;
@@ -237,8 +237,8 @@ select {
 }
 .phoneno-input{
     background: #FFFFFF;
-    border: 1px solid #707F8D !important;
-    border-radius: 0px 5px 5px 0px !important;
+    border: 1px solid #707F8D;
+    border-radius: 0px 5px 5px 0px;
     padding: 24px 15px !important;
 }
 input[type="date"]::-webkit-inner-spin-button,

@@ -21,7 +21,7 @@
                 Your account has been created. Add your debit or credit card to start using Beep To Pay
             </p>
 
-            <form action="#" class="mt-5 w-60">
+            <form action="javascript:;" class="mt-5 w-60">
 
                 <h4 class="font_16 font-weight-bold">Add Debit or Credit Card!</h4>
                 <div class="form-group mt-3">

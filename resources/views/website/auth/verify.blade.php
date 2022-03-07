@@ -12,7 +12,7 @@
          <div class="container form-container h_75">
             @if(session()->has('error'))
                 <div class="alert alert-danger alert-dismissible text-center mr-2">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <a href="javascript:;" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>Error!</strong> {!! session('error') !!}
                 </div>
             @endif

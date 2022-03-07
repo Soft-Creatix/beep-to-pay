@@ -22,7 +22,7 @@
 
                         Set a Payment PIN for your account to be used when checking out.
                     </p>
-                    <form action="#" class="mt-4 w-60 p-4">
+                    <form action="javascript:;" class="mt-4 w-60 p-4">
                         <div class="d-flex bd-highlight">
                             <div class="p-2 flex-fill bd-highlight"><input type="text"
                                     class="form-control input-field text-center" placeholder="0" /></div>
