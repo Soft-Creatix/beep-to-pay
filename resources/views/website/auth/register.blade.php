@@ -15,6 +15,17 @@
    <div class="row">
       <div class="col-12 p-0 mt-5 mb-5">
          <div class="container form-container">
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible text-center">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p><strong>Error!</strong></p>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             {{-- 'name' => $data['name'],
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
@@ -56,6 +67,7 @@
                            <option value="+674">+674</option>
                            <option value="+675">+675</option>
                            <option value="+676">+676</option>
+                           <option value="+92">+92</option>
                         </select>
                      </div>
                      <div class="flex-fill bd-highlight">
@@ -70,7 +82,7 @@
                </div>
                <div class="form-group">
                   <!-- <input type="date" class="form-control input-field" placeholder="Date of Birth" /> -->
-                  <input placeholder="Date of Birth" name="dob" value="{{ old('identity_card') }}" class="form-control input-field" type="text"
+                  <input placeholder="Date of Birth" name="dob" value="{{ old('dob') }}" class="form-control input-field" type="text"
                      onfocus="(this.type='date')" id="date" style="display: flex;
                      justify-content: center;
                      align-items: center;

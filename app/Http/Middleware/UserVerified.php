@@ -17,8 +17,8 @@ class UserVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->is_verified == null) {
-            return redirect('/verifyOTP');
+        if(Auth::user()->is_verified == null || Auth::user()->is_verified == 0) {
+            return redirect('/verification');
         }
 
         return $next($request);
