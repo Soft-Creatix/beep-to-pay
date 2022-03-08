@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Card;
+use Laravel\Ui\Presets\React;
+use Symfony\Component\HttpFoundation\Request;
 
 class WebsiteController extends Controller
 {
@@ -13,7 +16,7 @@ class WebsiteController extends Controller
 
     public function dashboard()
     {
-        return view('website.dashboard');
+        return view('website.dashboard', get_defined_vars());
     }
 
     public function success()
@@ -28,7 +31,14 @@ class WebsiteController extends Controller
 
     public function removeCard()
     {
-        return view('website.remove-card');
+        $card = Card::where('user_id', auth()->user()->id)->first();
+        return view('website.remove-card', get_defined_vars());
+    }
+
+    public function deleteCard($id)
+    {
+        Card::where('id', $id)->delete();
+        return redirect()->route('website.dashboard')->with('message', 'Card deleted successfully!');
     }
 
     public function receipt()
@@ -44,5 +54,15 @@ class WebsiteController extends Controller
     public function confirmInfo()
     {
         return view('website.confirm-info');
+    }
+
+    public function addpaymentCard(Request $request)
+    {
+        $checkCard = Card::where('user_id', auth()->user()->id)->first();
+        if ($checkCard) return 'false';
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        Card::create($data);
+        return 'true';
     }
 }

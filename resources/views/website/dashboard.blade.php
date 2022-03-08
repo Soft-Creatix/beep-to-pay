@@ -1,5 +1,3 @@
-
-
 @extends('website.layouts.app')
 
 @section('title', 'Beep To Pay')
@@ -15,23 +13,28 @@
         <div class="row">
             <div class="col-12 p-0 mt-5 mb-5">
                 <div class="container form-container" style="padding: 1.5% 10% !important;">
+                    @if (Session::has('message'))
+                        <div class="alert alert-success">{{ Session::get('message') }}</div>
+                    @endif
+
                     <h3 class="font_16 font-weight-bold mt-3">My Cards</h3>
                     <div class="row mt-3">
                         <div class="col-6">
                             <div class="text-center">
-                                <img src="{{asset('website/images/card__box.png')}}" class="img-fluid card-img" alt="">
+                                <img src="{{ asset('website/images/card__box.png') }}" class="img-fluid card-img" alt="">
                                 <div class="mt-2">
-                                    <a href="{{ route('website.remove-card') }}" class="font_14 royal-blue">Remove Card</a>
+                                    <a href="{{ route('website.remove-card') }}" class="font_14 royal-blue">Remove
+                                        Card</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6 add-card">
                             <div>
-                                <button class="button-unset">
-                                    <img src="{{asset('website/images/add.png')}}" class="img-fluid" alt="">
+                                <a href="{{ route('website.payment-card') }}" class="button-unset">
+                                    <img src="{{ asset('website/images/add.png') }}" class="img-fluid" alt="">
                                     <br>
                                     <span class="font_14 greyee">Add new card</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +49,7 @@
                     <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_1.png')}}" class="img-fluid res-img" alt="">
+                                <img src="{{ asset('website/images/res_1.png') }}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
                                     Coffee Bean & Tea Leaf</span></div>
@@ -60,7 +63,7 @@
                     <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_2.png')}}" class="img-fluid res-img" alt="">
+                                <img src="{{ asset('website/images/res_2.png') }}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span
                                     class="font_14 greyee">KFC</span></div>
@@ -74,7 +77,7 @@
                     <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_3.png')}}" class="img-fluid res-img" alt="">
+                                <img src="{{ asset('website/images/res_3.png') }}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">Excapade
                                     Sushi</span></div>
@@ -94,7 +97,7 @@
                     <a href="{{ route('website.receipt') }}">
                         <div class="d-flex bd-highlight py-2">
                             <div class="bd-highlight">
-                                <img src="{{asset('website/images/res_1.png')}}" class="img-fluid res-img" alt="">
+                                <img src="{{ asset('website/images/res_1.png') }}" class="img-fluid res-img" alt="">
                             </div>
                             <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
                                     Coffee Bean & Tea Leaf</span></div>
@@ -114,5 +117,3 @@
 
 @push('scripts')
 @endpush
-
-
