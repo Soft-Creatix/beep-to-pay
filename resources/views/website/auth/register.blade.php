@@ -131,7 +131,7 @@
         }
 
         $(document).ready(function() {
-            // $('#ic-number').mask('xx-xxxxxxx').val('').trigger('input');
+            $('#ic-number').mask('99-9999999');
             $(function() {
                 $("#dob").datepicker({
                     dateFormat: 'dd-mm-yy',
