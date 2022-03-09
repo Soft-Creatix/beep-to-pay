@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Testing Routes
 Route::post('/check-api', [MasterCardPaymentController::class, 'index']);
+Route::get('/encrypt-api', [MasterCardPaymentController::class, 'encryptData']);
 
 /* MasterCard Routes */
 Route::post('/tokenize', [MasterCardPaymentController::class, 'tokenize']);

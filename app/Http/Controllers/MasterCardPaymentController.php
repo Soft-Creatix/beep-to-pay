@@ -7,9 +7,70 @@ use Illuminate\Support\Facades\Redis;
 use Mastercard\Developer\OAuth\Utils\AuthenticationUtils;
 use Mastercard\Developer\OAuth\OAuth;
 use Mastercard\Developer\Signers\CurlRequestSigner;
+use Mastercard\Developer\Encryption;
+use Mastercard\Developer\Encryption\FieldLevelEncryption;
+use Mastercard\Developer\Encryption\FieldLevelEncryptionConfigBuilder;
+use Mastercard\Developer\Encryption\FieldValueEncoding;
 
 class MasterCardPaymentController extends Controller
 {
+    public function encryptData() {
+
+        $payload = '
+        "encryptedPayload": {
+            "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
+            "encryptedKey": "A1B2C3D4E5F6112233445566",
+            "oaepHashingAlgorithm": "SHA512",
+            "iv": "NA",
+            "encryptedData": {
+              "cardAccountData": {
+                "accountNumber": "5123456789012345",
+                "expiryMonth": "09",
+                "expiryYear": "21",
+                "securityCode": "123"
+              },
+              "accountHolderData": {
+                "accountHolderAddress": {
+                  "line1": "100 1st Street",
+                  "line2": "Apt. 4B",
+                  "city": "St. Louis",
+                  "countrySubdivision": "MO",
+                  "postalCode": "61000",
+                  "country": "USA"
+                },
+                "accountHolderMobilePhoneNumber": {
+                  "countryDialInCode": "44",
+                  "phoneNumber": "07777 777 777"
+                }
+              },
+              "source": "ACCOUNT_ON_FILE"
+            }
+          }
+        ';
+
+        $encryptionCertificate = 'https://beeptopay.codigostudios.co.uk/Public-Key-Encrypt.crt';
+        $decryptionKey = 'https://beeptopay.codigostudios.co.uk/Private-Key-Decrypt.pem';
+
+        $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
+                    ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
+                    ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
+                    ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
+                    ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
+                    ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
+                    ->withEncryptionCertificate($encryptionCertificate)
+                    ->withDecryptionKey($decryptionKey)
+                    ->withOaepPaddingDigestAlgorithm('SHA-512')
+                    ->withEncryptedValueFieldName('encryptedData')
+                    ->withEncryptedKeyFieldName('encryptedKey')
+                    ->withIvFieldName('iv')
+                    ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
+                    ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
+                    ->withFieldValueEncoding(FieldValueEncoding::HEX)
+                    ->build();
+
+        $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $config);
+        return (json_encode(json_decode($encryptedPayload), JSON_PRETTY_PRINT));
+    }
 
     public function index() {
         // finger print value
