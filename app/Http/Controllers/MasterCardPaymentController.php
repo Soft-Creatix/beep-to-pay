@@ -11,6 +11,7 @@ use Mastercard\Developer\Encryption;
 use Mastercard\Developer\Encryption\FieldLevelEncryption;
 use Mastercard\Developer\Encryption\FieldLevelEncryptionConfigBuilder;
 use Mastercard\Developer\Encryption\FieldValueEncoding;
+use Mastercard\Developer\Utils\EncryptionUtils;
 
 class MasterCardPaymentController extends Controller
 {
@@ -48,12 +49,17 @@ class MasterCardPaymentController extends Controller
           }
         ';
 
-        // $encryptionCertificate = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
-        // $decryptionKey = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
-
-        $encryptionCertificate = 'https://beeptopay.codigostudios.co.uk/Public-Key-Encrypt.crt';
-        $decryptionKey = 'https://beeptopay.codigostudios.co.uk/Private-Key-Decrypt.pem';
-
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+        $encryptionCertificate = EncryptionUtils::loadEncryptionCertificate(
+          $keypath,
+          'keyalias',
+          'keystorepassword'
+        );
+        $decryptionKey = EncryptionUtils::loadDecryptionKey(
+          $keypath,
+          'keyalias',
+          'keystorepassword'
+        );
 
         $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
                         ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
