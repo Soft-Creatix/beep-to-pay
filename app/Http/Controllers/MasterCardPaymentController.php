@@ -48,41 +48,46 @@ class MasterCardPaymentController extends Controller
           }
         ';
 
+        // $encryptionCertificate = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+        // $decryptionKey = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+
         $encryptionCertificate = 'https://beeptopay.codigostudios.co.uk/Public-Key-Encrypt.crt';
         $decryptionKey = 'https://beeptopay.codigostudios.co.uk/Private-Key-Decrypt.pem';
 
+
         $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
-                    ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
-                    ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
-                    ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
-                    ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
-                    ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
-                    ->withEncryptionCertificate($encryptionCertificate)
-                    ->withDecryptionKey($decryptionKey)
-                    ->withOaepPaddingDigestAlgorithm('SHA-512')
-                    ->withEncryptedValueFieldName('encryptedData')
-                    ->withEncryptedKeyFieldName('encryptedKey')
-                    ->withIvFieldName('iv')
-                    ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
-                    ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
-                    ->withFieldValueEncoding(FieldValueEncoding::HEX)
-                    ->build();
+                        ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
+                        ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
+                        ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
+                        ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
+                        ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
+                        ->withEncryptionCertificate($encryptionCertificate)
+                        ->withDecryptionKey($decryptionKey)
+                        ->withOaepPaddingDigestAlgorithm('SHA-512')
+                        ->withEncryptedValueFieldName('encryptedData')
+                        ->withEncryptedKeyFieldName('encryptedKey')
+                        ->withIvFieldName('iv')
+                        ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
+                        ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
+                        ->withFieldValueEncoding(FieldValueEncoding::HEX)
+                        ->build();
 
         $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $config);
+
         return (json_encode(json_decode($encryptedPayload), JSON_PRETTY_PRINT));
     }
 
     public function index() {
         // finger print value
         // 243E6992EA467F1CBB9973FACFCC3BF17B5CD007
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
 
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $uri = 'https://sandbox.api.mastercard.com/digitization/static/1/0/tokenize';
         $method = 'POST';
@@ -145,13 +150,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function tokenize(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
 
         // $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
@@ -239,13 +244,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function notifyTokenUpdated(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/notifyTokenUpdated';
@@ -320,13 +325,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function transact(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/remotetransaction/static/1/0/transact';
@@ -353,13 +358,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function getAsset() {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'GET';
         $baseUri = 'https://sandbox.api.mastercard.com/mdes/assets/static/1/0/asset/{ASSET_ID}';
@@ -379,13 +384,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function suspend(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/suspend';
@@ -414,13 +419,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function unSuspend(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/unsuspend';
@@ -449,13 +454,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function delete(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/delete';
@@ -484,13 +489,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function getTaskStatus(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/getTaskStatus';
@@ -516,13 +521,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function searchTokens(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/searchTokens';
@@ -578,13 +583,13 @@ class MasterCardPaymentController extends Controller
     }
 
     public function getToken(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/beeptopay-sandbox.p12';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $signingKey = AuthenticationUtils::loadSigningKey(
             $keypath,
             'keyalias',
             'keystorepassword'
         );
-        $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!df749b223f4d4467bb1118a647b785a50000000000000000';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/getToken';
