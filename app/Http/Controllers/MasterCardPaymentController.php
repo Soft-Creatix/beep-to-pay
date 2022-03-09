@@ -33,7 +33,7 @@ class MasterCardPaymentController extends Controller
             "taskId": "123456",
             "fundingAccountInfo": {
               "encryptedPayload": {
-                "publicKeyFingerprint": "4c4ead5927f0df8117f178eea9308daa58e27c2b",
+                "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
                 "encryptedKey": "A1B2C3D4E5F6112233445566",
                 "oaepHashingAlgorithm": "SHA512",
                 "iv": "NA",
@@ -92,6 +92,22 @@ class MasterCardPaymentController extends Controller
         );
         $consumerKey = 'a80OC8LLt9kFGcWYHNSXJxcAWIJlLARHC1MA3VCr079514e3!9c9bce6a655c4488ba5c52247ae00ee40000000000000000';
 
+
+        // $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
+        //             ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
+        //             ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
+        //             ->withEncryptionCertificate($encryptionCertificate)
+        //             ->withDecryptionKey($decryptionKey)
+        //             ->withOaepPaddingDigestAlgorithm('SHA-512')
+        //             ->withEncryptedValueFieldName('encryptedData')
+        //             ->withEncryptedKeyFieldName('encryptedKey')
+        //             ->withIvFieldName('iv')
+        //             ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
+        //             ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
+        //             ->withFieldValueEncoding(FielValueEncoding::HEX)
+        //             ->withEncryptionCertificateFingerprint("80810fc13a8319fcf0e2ec322c82a4c304b782cc3ce671176343cfe8160c2279")
+        //             ->build();
+
         $method = 'POST';
         $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/tokenize';
         // $payload = json_encode(['foo' => 'bår']);
@@ -103,7 +119,7 @@ class MasterCardPaymentController extends Controller
             "taskId": "123456",
             "fundingAccountInfo": {
               "encryptedPayload": {
-                "publicKeyFingerprint": "4c4ead5927f0df8117f178eea9308daa58e27c2b",
+                "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
                 "encryptedKey": "A1B2C3D4E5F6112233445566",
                 "oaepHashingAlgorithm": "SHA512",
                 "iv": "NA",
@@ -177,7 +193,7 @@ class MasterCardPaymentController extends Controller
             "responseHost": "site2.payment-app-provider.com",
             "requestId": 123456,
             "encryptedPayload": {
-              "publicKeyFingerprint": "4c4ead5927f0df8117f178eea9308daa58e27c2b",
+              "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
               "encryptedKey": "A1B2C3D4E5F6112233445566",
               "oaepHashingAlgorithm": "SHA512",
               "iv": "NA",
@@ -455,7 +471,7 @@ class MasterCardPaymentController extends Controller
             "responseHost": "site2.payment-app-provider.com",
             "fundingAccountInfo": {
               "encryptedPayload": {
-                "publicKeyFingerprint": "4c4ead5927f0df8117f178eea9308daa58e27c2b",
+                "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
                 "encryptedKey": "A1B2C3D4E5F6112233445566",
                 "oaepHashingAlgorithm": "SHA512",
                 "iv": "NA",

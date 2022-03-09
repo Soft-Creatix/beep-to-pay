@@ -73,23 +73,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="d-flex bd-highlight">
-                                <div class="bd-highlight">
-                                    <select class="form-select code-select" aria-label="Default select example"
-                                        name="phone_code">
-                                        <option value="+673" selected>+673</option>
-                                        <option value="+674">+674</option>
-                                        <option value="+675">+675</option>
-                                        <option value="+676">+676</option>
-                                        <option value="+92">+92</option>
-                                    </select>
-                                </div>
-                                <div class="flex-fill bd-highlight">
-                                    <input type="number" name="phone_number" value="{{ old('phone_number') }}"
-                                        class="form-control phoneno-input" placeholder="Phone number"
-                                        data-rule-required="true" data-msg-required="Please enter a phone number" />
-                                </div>
-                            </div>
+                            <input id="phone" type="tel" class="country-phone" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone number"
+                            data-rule-required="true" data-msg-required="Please enter a phone number">
                         </div>
                         <div class="form-group">
                             <input type="text" name="identity_card" value="{{ old('identity_card') }}"
@@ -167,5 +152,54 @@
                 validClass: "is-valid"
             });
         });
+
+        var telInput = $("#phone");
+
+        // initialise plugin
+        telInput.intlTelInput({
+            allowExtensions: true,
+            formatOnDisplay: true,
+            autoFormat: true,
+            autoHideDialCode: true,
+            autoPlaceholder: true,
+            defaultCountry: "auto",
+            ipinfoToken: "yolo",
+            nationalMode: false,
+            numberType: "MOBILE",
+            onlyCountries: ['bn', 'us', 'gb', 'ch', 'ca', 'do','pk'],
+            preferredCountries: ['sa', 'ae', 'qa','om','bh','kw','ma', 'pk'],
+            preventInvalidNumbers: true,
+            separateDialCode: true,
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                $.get("http://ipinfo.io?token=ee8a1ac0f823c9", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
+        });
+
+        var reset = function() {
+            telInput.removeClass("error");
+            // errorMsg.addClass("hide");
+            // validMsg.addClass("hide");
+        };
+
+        // on blur: validate
+        telInput.blur(function() {
+            reset();
+            if ($.trim(telInput.val())) {
+                if (telInput.intlTelInput("isValidNumber")) {
+                    validMsg.removeClass("hide");
+                } else {
+                    telInput.addClass("error");
+                    errorMsg.removeClass("hide");
+                }
+            }
+        });
+
+        // on keyup / change flag: reset
+        telInput.on("keyup change", reset);
     </script>
 @endpush
