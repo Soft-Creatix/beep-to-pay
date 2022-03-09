@@ -73,8 +73,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input id="phone" type="tel" class="country-phone" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone number"
-                            data-rule-required="true" data-msg-required="Please enter a phone number">
+                            <input id="phone" type="tel" class="country-phone" name="phone_number" value="{{ old('phone_number') }}" data-rule-required="true" data-msg-required="Please enter a phone number">
                         </div>
                         <div class="form-group">
                             <input type="text" name="identity_card" value="{{ old('identity_card') }}"
