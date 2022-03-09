@@ -171,7 +171,7 @@
             separateDialCode: false,
             initialCountry: "auto",
             geoIpLookup: function(callback) {
-                $.get("http://ipinfo.io?token=ee8a1ac0f823c9", function() {}, "jsonp").always(function(resp) {
+                $.get("https://ipinfo.io?token=ee8a1ac0f823c9", function() {}, "jsonp").always(function(resp) {
                     var countryCode = (resp && resp.country) ? resp.country : "";
                     callback(countryCode);
                 });
