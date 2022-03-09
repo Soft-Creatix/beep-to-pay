@@ -152,10 +152,10 @@
             });
         });
 
-        var telInput = $("#phone");
+        var phone_number = $("#phone");
 
         // initialise plugin
-        telInput.intlTelInput({
+        phone_number.intlTelInput({
             allowExtensions: true,
             formatOnDisplay: true,
             autoFormat: true,
@@ -168,7 +168,7 @@
             onlyCountries: ['bn', 'us', 'gb', 'ch', 'ca', 'do','pk'],
             preferredCountries: ['sa', 'ae', 'qa','om','bh','kw','ma', 'pk'],
             preventInvalidNumbers: true,
-            separateDialCode: true,
+            separateDialCode: false,
             initialCountry: "auto",
             geoIpLookup: function(callback) {
                 $.get("http://ipinfo.io?token=ee8a1ac0f823c9", function() {}, "jsonp").always(function(resp) {
@@ -180,25 +180,25 @@
         });
 
         var reset = function() {
-            telInput.removeClass("error");
+            phone_number.removeClass("error");
             // errorMsg.addClass("hide");
             // validMsg.addClass("hide");
         };
 
         // on blur: validate
-        telInput.blur(function() {
+        phone_number.blur(function() {
             reset();
-            if ($.trim(telInput.val())) {
-                if (telInput.intlTelInput("isValidNumber")) {
+            if ($.trim(phone_number.val())) {
+                if (phone_number.intlTelInput("isValidNumber")) {
                     validMsg.removeClass("hide");
                 } else {
-                    telInput.addClass("error");
+                    phone_number.addClass("error");
                     errorMsg.removeClass("hide");
                 }
             }
         });
 
         // on keyup / change flag: reset
-        telInput.on("keyup change", reset);
+        phone_number.on("keyup change", reset);
     </script>
 @endpush

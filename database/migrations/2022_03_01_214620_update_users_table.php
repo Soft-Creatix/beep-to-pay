@@ -15,7 +15,6 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone_number')->unique()->nullable();
-            $table->string('phone_code')->nullable();
             $table->string('identity_card')->unique()->nullable();
             $table->date('dob')->nullable();
             $table->string('gender')->nullable();
@@ -34,7 +33,6 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('phone_number');
-            $table->dropColumn('phone_code');
             $table->dropColumn('identity_card');
             $table->dropColumn('dob');
             $table->dropColumn('gender');
