@@ -43,7 +43,7 @@
                         @csrf
                         <h4 class="font_16 font-weight-bold">Account Information</h4>
                         <div class="form-group">
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control input-field"
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-control input-field"
                                 placeholder="Name" data-rule-required="true" data-msg-required="Please enter a name" />
                         </div>
                         <div class="form-group">
@@ -76,7 +76,7 @@
                             <input id="phone" type="tel" class="country-phone" name="phone_number" value="{{ old('phone_number') }}" data-rule-required="true" data-msg-required="Please enter a phone number">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="identity_card" value="{{ old('identity_card') }}"
+                            <input type="text" name="identity_card" id="ic-number" value="{{ old('identity_card') }}"
                                 class="form-control input-field" placeholder="Identity Card (I.C)" data-rule-required="true"
                                 data-msg-required="Please enter an identity card number" />
                         </div>
@@ -131,6 +131,7 @@
         }
 
         $(document).ready(function() {
+            // $('#ic-number').mask('xx-xxxxxxx').val('').trigger('input');
             $(function() {
                 $("#dob").datepicker({
                     dateFormat: 'dd-mm-yy',
