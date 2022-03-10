@@ -51,9 +51,7 @@ class MasterCardPaymentController extends Controller
 
         $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $encryptionCertificate = EncryptionUtils::loadEncryptionCertificate(
-          $keypath,
-          'keyalias',
-          'keystorepassword'
+            'https://beeptopay.codigostudios.co.uk/Beep-to-Pay.Certificate.pem'
         );
         $decryptionKey = EncryptionUtils::loadDecryptionKey(
           $keypath,
