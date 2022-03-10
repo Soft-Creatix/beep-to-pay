@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Testing Routes
-Route::post('/check-api', [MasterCardPaymentController::class, 'index']);
+Route::get('/header', [MasterCardPaymentController::class, 'authHeaderGenerator']);
 Route::get('/encrypt-api', [MasterCardPaymentController::class, 'encryptData']);
 
 /* MasterCard Routes */

@@ -15,48 +15,86 @@ use Mastercard\Developer\Utils\EncryptionUtils;
 
 class MasterCardPaymentController extends Controller
 {
-    public function encryptData() {
-
-        $payload = '{"encryptedPayload": {
-            "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
-            "encryptedKey": "A1B2C3D4E5F6112233445566",
-            "oaepHashingAlgorithm": "SHA512",
-            "iv": "NA",
-            "encryptedData": {
-              "cardAccountData": {
-                "accountNumber": "5123456789012345",
-                "expiryMonth": "09",
-                "expiryYear": "21",
-                "securityCode": "123"
-              },
-              "accountHolderData": {
-                "accountHolderAddress": {
-                  "line1": "100 1st Street",
-                  "line2": "Apt. 4B",
-                  "city": "St. Louis",
-                  "countrySubdivision": "MO",
-                  "postalCode": "61000",
-                  "country": "USA"
-                },
-                "accountHolderMobilePhoneNumber": {
-                  "countryDialInCode": "44",
-                  "phoneNumber": "07777 777 777"
-                }
-              },
-              "source": "ACCOUNT_ON_FILE"
-            }
-        }}';
-        $payloadJSON = json_decode($payload, true);
-
-        $encryptionCertificate = EncryptionUtils::loadEncryptionCertificate(
-            'https://beeptopay.codigostudios.co.uk/Beep-to-Pay.Certificate.pem'
+    public function authHeaderGenerator() {
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+        $signingKey = AuthenticationUtils::loadSigningKey(
+            $keypath,
+            'keyalias',
+            'keystorepassword'
         );
 
-        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
+
+        $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/tokenize';
+        $method = 'POST';
+        $payload = '';
+
+        $authHeader = OAuth::getAuthorizationHeader($uri, $method, $payload, $consumerKey, $signingKey);
+
+        return response()->json(['data' => $authHeader]);
+    }
+
+    public function encryptData() {
+
+        $payload = '{
+            "responseHost": "site1.your-server.com",
+            "requestId": "123456",
+            "tokenType": "CLOUD",
+            "tokenRequestorId": "98765432101",
+            "taskId": "123456",
+            "fundingAccountInfo": {
+              "encryptedPayload": {
+                "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
+                "encryptedKey": "A1B2C3D4E5F6112233445566",
+                "oaepHashingAlgorithm": "SHA512",
+                "iv": "NA",
+                "encryptedData": {
+                  "cardAccountData": {
+                    "accountNumber": "5123456789012345",
+                    "expiryMonth": "09",
+                    "expiryYear": "21",
+                    "securityCode": "123"
+                  },
+                  "accountHolderData": {
+                    "accountHolderAddress": {
+                      "line1": "100 1st Street",
+                      "line2": "Apt. 4B",
+                      "city": "St. Louis",
+                      "countrySubdivision": "MO",
+                      "postalCode": "61000",
+                      "country": "USA"
+                    },
+                    "accountHolderMobilePhoneNumber": {
+                      "countryDialInCode": "44",
+                      "phoneNumber": "07777 777 777"
+                    }
+                  },
+                  "source": "ACCOUNT_ON_FILE"
+                }
+              }
+            },
+            "consumerLanguage": "en",
+            "tokenizationAuthenticationValue": "RHVtbXkgYmFzZSA2NCBkYXRhIC0gdGhpcyBpcyBub3QgYSByZWFsIFRBViBleGFtcGxl",
+            "decisioningData": {
+              "recommendation": "APPROVED",
+              "recommendationAlgorithmVersion": "01",
+              "deviceScore": "1",
+              "accountScore": "1",
+              "recommendationReasons": [
+                "LONG_ACCOUNT_TENURE"
+              ],
+              "deviceCurrentLocation": "38.63,-90.25",
+              "deviceIpAddress": "127.0.0.1",
+              "mobileNumberSuffix": 3456
+            }
+        }';
+
+        $encryptionCertificate = EncryptionUtils::loadEncryptionCertificate(
+            'https://static.developer.mastercard.com/content/mdes-digital-enablement/sbx-keys/Public-Key-Encrypt.crt'
+        );
+
         $decryptionKey = EncryptionUtils::loadDecryptionKey(
-          $keypath,
-          'keyalias',
-          'keystorepassword'
+            'https://static.developer.mastercard.com/content/mdes-digital-enablement/sbx-keys/Private-Key-Decrypt.pem'
         );
 
         $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
@@ -77,110 +115,13 @@ class MasterCardPaymentController extends Controller
                         ->build();
 
         $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $config);
+        $decryptPayload = FieldLevelEncryption::decryptPayload($encryptedPayload, $config);
 
-        return (json_encode(json_decode($encryptedPayload), JSON_PRETTY_PRINT));
-    }
-
-    public function index() {
-        // finger print value
-        // 243E6992EA467F1CBB9973FACFCC3BF17B5CD007
-        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
-        $signingKey = AuthenticationUtils::loadSigningKey(
-            $keypath,
-            'keyalias',
-            'keystorepassword'
-        );
-
-        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
-
-        $uri = 'https://sandbox.api.mastercard.com/digitization/static/1/0/tokenize';
-        $method = 'POST';
-        $payload = '{
-            "responseHost": "site1.your-server.com",
-            "requestId": "123456",
-            "tokenType": "CLOUD",
-            "tokenRequestorId": "98765432101",
-            "taskId": "123456",
-            "fundingAccountInfo": {
-              "encryptedPayload": {
-                "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
-                "encryptedKey": "A1B2C3D4E5F6112233445566",
-                "oaepHashingAlgorithm": "SHA512",
-                "iv": "NA",
-                "encryptedData": {
-                  "cardAccountData": {
-                    "accountNumber": "5123456789012345",
-                    "expiryMonth": "09",
-                    "expiryYear": "21",
-                    "securityCode": "123"
-                  },
-                  "accountHolderData": {
-                    "accountHolderAddress": {
-                      "line1": "100 1st Street",
-                      "line2": "Apt. 4B",
-                      "city": "St. Louis",
-                      "countrySubdivision": "MO",
-                      "postalCode": "61000",
-                      "country": "USA"
-                    },
-                    "accountHolderMobilePhoneNumber": {
-                      "countryDialInCode": "44",
-                      "phoneNumber": "07777 777 777"
-                    }
-                  },
-                  "source": "ACCOUNT_ON_FILE"
-                }
-              }
-            },
-            "consumerLanguage": "en",
-            "tokenizationAuthenticationValue": "RHVtbXkgYmFzZSA2NCBkYXRhIC0gdGhpcyBpcyBub3QgYSByZWFsIFRBViBleGFtcGxl",
-            "decisioningData": {
-              "recommendation": "APPROVED",
-              "recommendationAlgorithmVersion": "01",
-              "deviceScore": "1",
-              "accountScore": "1",
-              "recommendationReasons": [
-                "LONG_ACCOUNT_TENURE"
-              ],
-              "deviceCurrentLocation": "38.63,-90.25",
-              "deviceIpAddress": "127.0.0.1",
-              "mobileNumberSuffix": 3456
-            }
-        }';
-
-        $authHeader = OAuth::getAuthorizationHeader($uri, $method, $payload, $consumerKey, $signingKey);
-
-        return response()->json(['data' => $authHeader]);
+        return (json_encode(json_decode($decryptPayload), JSON_PRETTY_PRINT));
     }
 
     public function tokenize(Request $request) {
-        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
-        $signingKey = AuthenticationUtils::loadSigningKey(
-            $keypath,
-            'keyalias',
-            'keystorepassword'
-        );
-        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
-
-        // $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
-        //             ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
-        //             ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
-        //             ->withEncryptionCertificate($encryptionCertificate)
-        //             ->withDecryptionKey($decryptionKey)
-        //             ->withOaepPaddingDigestAlgorithm('SHA-512')
-        //             ->withEncryptedValueFieldName('encryptedData')
-        //             ->withEncryptedKeyFieldName('encryptedKey')
-        //             ->withIvFieldName('iv')
-        //             ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
-        //             ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
-        //             ->withFieldValueEncoding(FielValueEncoding::HEX)
-        //             ->withEncryptionCertificateFingerprint("80810fc13a8319fcf0e2ec322c82a4c304b782cc3ce671176343cfe8160c2279")
-        //             ->build();
-
-        $method = 'POST';
-        $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/tokenize';
-        // $payload = json_encode(['foo' => 'bår']);
         $payload = '{
             "responseHost": "site1.your-server.com",
             "requestId": "123456",
@@ -230,13 +171,54 @@ class MasterCardPaymentController extends Controller
               ],
               "deviceCurrentLocation": "38.63,-90.25",
               "deviceIpAddress": "127.0.0.1",
-              "mobileNumberSuffix": 3456
+              "mobileNumberSuffix": "92"
             }
         }';
+        // $payloadJSON = json_decode($payload, true);
+
+        $encryptionCertificate = EncryptionUtils::loadEncryptionCertificate(
+            'https://static.developer.mastercard.com/content/mdes-digital-enablement/sbx-keys/Public-Key-Encrypt.crt'
+        );
+
+        $decryptionKey = EncryptionUtils::loadDecryptionKey(
+            'https://static.developer.mastercard.com/content/mdes-digital-enablement/sbx-keys/Private-Key-Decrypt.pem'
+        );
+
+        $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
+                        ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
+                        ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
+                        ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
+                        ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
+                        ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
+                        ->withEncryptionCertificate($encryptionCertificate)
+                        ->withDecryptionKey($decryptionKey)
+                        ->withOaepPaddingDigestAlgorithm('SHA-512')
+                        ->withEncryptedValueFieldName('encryptedData')
+                        ->withEncryptedKeyFieldName('encryptedKey')
+                        ->withIvFieldName('iv')
+                        ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
+                        ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
+                        ->withFieldValueEncoding(FieldValueEncoding::HEX)
+                        ->build();
+
+        $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $config);
+        $payload = $encryptedPayload;
+
+        $method = 'POST';
+        $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/tokenize';
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+        $signingKey = AuthenticationUtils::loadSigningKey(
+            $keypath,
+            'keyalias',
+            'keystorepassword'
+        );
+        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
+
         $headers = array(
             'Content-Type: application/json',
             'Content-Length: ' . strlen($payload)
         );
+
         $handle = curl_init($uri);
         curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method, CURLOPT_POSTFIELDS => $payload));
         $signer = new CurlRequestSigner($consumerKey, $signingKey);
