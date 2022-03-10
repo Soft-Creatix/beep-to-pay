@@ -17,8 +17,7 @@ class MasterCardPaymentController extends Controller
 {
     public function encryptData() {
 
-        $payload = '
-        "encryptedPayload": {
+        $payload = '{"encryptedPayload": {
             "publicKeyFingerprint": "243E6992EA467F1CBB9973FACFCC3BF17B5CD007",
             "encryptedKey": "A1B2C3D4E5F6112233445566",
             "oaepHashingAlgorithm": "SHA512",
@@ -46,13 +45,14 @@ class MasterCardPaymentController extends Controller
               },
               "source": "ACCOUNT_ON_FILE"
             }
-          }
-        ';
+        }}';
+        $payloadJSON = json_decode($payload, true);
 
-        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $encryptionCertificate = EncryptionUtils::loadEncryptionCertificate(
             'https://beeptopay.codigostudios.co.uk/Beep-to-Pay.Certificate.pem'
         );
+
+        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
         $decryptionKey = EncryptionUtils::loadDecryptionKey(
           $keypath,
           'keyalias',
