@@ -22,10 +22,10 @@
             <form action="{{ route('website.verifyOTP') }}" method="post" class="mt-4 w-60 p-4" id="OTPForm">
                 @csrf
                <div class="d-flex bd-highlight">
-                  <input type="number" min="0" maxlength="1" name="otp1" class="form-control input-field text-center mr-2" placeholder="0" />
-                  <input type="number" min="0" maxlength="1" name="otp2" class="form-control input-field text-center mr-2" placeholder="0" />
-                  <input type="number" min="0" maxlength="1" name="otp3" class="form-control input-field text-center mr-2" placeholder="0" />
-                  <input type="number" min="0" maxlength="1" name="otp4" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="text" min="0" maxlength="1" name="otp1" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="text" min="0" maxlength="1" name="otp2" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="text" min="0" maxlength="1" name="otp3" class="form-control input-field text-center mr-2" placeholder="0" />
+                  <input type="text" min="0" maxlength="1" name="otp4" class="form-control input-field text-center mr-2" placeholder="0" />
                </div>
                <div class="form-group text-center mr-2 mt-4">
                   <a href="javascript:;" class="royal-blue font_16" onclick="resendOTP()">Resend OTP</a>

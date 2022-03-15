@@ -97,27 +97,25 @@ class MasterCardPaymentController extends Controller
             'https://static.developer.mastercard.com/content/mdes-digital-enablement/sbx-keys/Private-Key-Decrypt.pem'
         );
 
-        $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
-                        ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
-                        ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
-                        ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
-                        ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
-                        ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
-                        ->withEncryptionCertificate($encryptionCertificate)
-                        ->withDecryptionKey($decryptionKey)
-                        ->withOaepPaddingDigestAlgorithm('SHA-512')
-                        ->withEncryptedValueFieldName('encryptedData')
-                        ->withEncryptedKeyFieldName('encryptedKey')
-                        ->withIvFieldName('iv')
-                        ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
-                        ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
-                        ->withFieldValueEncoding(FieldValueEncoding::HEX)
-                        ->build();
+        $fieldLevelEncryptionConfig = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
+            ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
+            ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
+            ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
+            ->withEncryptionCertificate($encryptionCertificate)
+            ->withDecryptionKey($decryptionKey)
+            ->withOaepPaddingDigestAlgorithm('SHA-512')
+            ->withEncryptedValueFieldName('encryptedData')
+            ->withEncryptedKeyFieldName('encryptedKey')
+            ->withIvFieldName('iv')
+            ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
+            ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
+            ->withFieldValueEncoding(FieldValueEncoding::HEX)
+            ->build();
 
-        $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $config);
-        $decryptPayload = FieldLevelEncryption::decryptPayload($encryptedPayload, $config);
+        $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $fieldLevelEncryptionConfig);
+        $decryptPayload = FieldLevelEncryption::decryptPayload($encryptedPayload, $fieldLevelEncryptionConfig);
 
-        return (json_encode(json_decode($decryptPayload), JSON_PRETTY_PRINT));
+        return (json_encode(json_decode($encryptedPayload), JSON_PRETTY_PRINT));
     }
 
     public function tokenize(Request $request) {
@@ -184,47 +182,49 @@ class MasterCardPaymentController extends Controller
             'https://static.developer.mastercard.com/content/mdes-digital-enablement/sbx-keys/Private-Key-Decrypt.pem'
         );
 
-        $config = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
-                        ->withEncryptionPath('$.cardInfo.encryptedData', '$.cardInfo')
-                        ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
-                        ->withEncryptionPath('$.encryptedPayload.encryptedData', '$.encryptedPayload')
-                        ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
-                        ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
-                        ->withEncryptionCertificate($encryptionCertificate)
-                        ->withDecryptionKey($decryptionKey)
-                        ->withOaepPaddingDigestAlgorithm('SHA-512')
-                        ->withEncryptedValueFieldName('encryptedData')
-                        ->withEncryptedKeyFieldName('encryptedKey')
-                        ->withIvFieldName('iv')
-                        ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
-                        ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
-                        ->withFieldValueEncoding(FieldValueEncoding::HEX)
-                        ->build();
+        $fieldLevelEncryptionConfig = FieldLevelEncryptionConfigBuilder::aFieldLevelEncryptionConfig()
+            ->withEncryptionPath('$.fundingAccountInfo.encryptedPayload.encryptedData', '$.fundingAccountInfo.encryptedPayload')
+            ->withDecryptionPath('$.tokenDetail', '$.tokenDetail.encryptedData')
+            ->withDecryptionPath('$.encryptedPayload', '$.encryptedPayload.encryptedData')
+            ->withEncryptionCertificate($encryptionCertificate)
+            ->withDecryptionKey($decryptionKey)
+            ->withOaepPaddingDigestAlgorithm('SHA-512')
+            ->withEncryptedValueFieldName('encryptedData')
+            ->withEncryptedKeyFieldName('encryptedKey')
+            ->withIvFieldName('iv')
+            ->withOaepPaddingDigestAlgorithmFieldName('oaepHashingAlgorithm')
+            ->withEncryptionCertificateFingerprintFieldName('publicKeyFingerprint')
+            ->withFieldValueEncoding(FieldValueEncoding::HEX)
+            ->build();
 
-        $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $config);
-        $payload = $encryptedPayload;
+        $encryptedPayload = FieldLevelEncryption::encryptPayload($payload, $fieldLevelEncryptionConfig);
 
-        $method = 'POST';
-        $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/tokenize';
-        $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
-        $signingKey = AuthenticationUtils::loadSigningKey(
-            $keypath,
-            'keyalias',
-            'keystorepassword'
-        );
-        $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
+        $api = new TokenizeApi($this->client, $this->config);
+        $request = self::buildTokenizeRequestSchema();
+        $response = $api->createTokenize($request);
+        // $payload = $encryptedPayload;
 
-        $headers = array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($payload)
-        );
+        // $method = 'POST';
+        // $uri = 'https://sandbox.api.mastercard.com/mdes/digitization/static/1/0/tokenize';
+        // $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';
+        // $signingKey = AuthenticationUtils::loadSigningKey(
+        //     $keypath,
+        //     'keyalias',
+        //     'keystorepassword'
+        // );
+        // $consumerKey = 'wcGABOEtw1oO3wqvNEkx002GibdX_6J2XLb3KgfC75db922b!33a25f64f32f4961bee76ec8206dfd190000000000000000';
 
-        $handle = curl_init($uri);
-        curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method, CURLOPT_POSTFIELDS => $payload));
-        $signer = new CurlRequestSigner($consumerKey, $signingKey);
-        $signer->sign($handle, $method, $headers, $payload);
-        $result = curl_exec($handle);
-        curl_close($handle);
+        // $headers = array(
+        //     'Content-Type: application/json',
+        //     'Content-Length: ' . strlen($payload)
+        // );
+
+        // $handle = curl_init($uri);
+        // curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method, CURLOPT_POSTFIELDS => $payload));
+        // $signer = new CurlRequestSigner($consumerKey, $signingKey);
+        // $signer->sign($handle, $method, $headers, $payload);
+        // $result = curl_exec($handle);
+        // curl_close($handle);
 
         return $result;
     }
