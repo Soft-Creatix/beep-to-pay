@@ -17,7 +17,7 @@ a {
     text-decoration: none !important;
 }
 a:hover {
-    color: unset !important;
+    color: unset;
 }
 .nav-bg {
     background: linear-gradient(0deg, #ffffff, #ffffff), #414042;
@@ -400,6 +400,9 @@ label.is-invalid {
 }
 .intl-tel-input {
     width: 100%;
+}
+.btn-del:hover {
+    color: #ffffff;
 }
 @media only screen and (max-width: 600px) {
     /* .code-select {

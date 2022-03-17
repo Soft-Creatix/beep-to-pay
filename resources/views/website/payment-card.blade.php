@@ -24,27 +24,40 @@
                         @csrf
                         <h4 class="font_16 font-weight-bold">Add Debit or Credit Card!</h4>
                         <div class="form-group mt-3">
-                            <input type="number" name="card_number" class="form-control input-field"
-                                placeholder="Card number" data-rule-required="true" data-rule-minlength="16"
+                            <input type="text" name="card_number" id="card_number" class="form-control input-field"
+                                placeholder="Card number" data-rule-required="true" data-rule-minlength="19" data-msg-minlength="Please enter 16 digits card number"
                                 data-msg-required="Please enter your card number">
                         </div>
                         <div class="form-group">
                             <div class="d-flex bd-highlight w-90">
-                                <div class="pr-3 flex-fill bd-highlight"><input type="number"
-                                        class="form-control input-field text-left" name="month" placeholder="MM"
+                                <div class="pr-3 flex-fill bd-highlight"><input type="text"
+                                        class="form-control input-field text-left" name="month" id="month" placeholder="MM"
                                         data-rule-required="true" data-msg-required="Please enter card month"
-                                        data-rule-minlength="2" /></div>
-                                <div class="pr-3 flex-fill bd-highlight"><input type="number"
-                                        class="form-control input-field text-left" name="year" placeholder="YY"
+                                        data-rule-minlength="2" data-rule-maxlength="2" /></div>
+                                <div class="pr-3 flex-fill bd-highlight"><input type="text"
+                                        class="form-control input-field text-left" name="year" id="year" placeholder="YY"
                                         data-rule-required="true" data-msg-required="Please enter your card year"
-                                        data-rule-minlength="2" /></div>
-                                <div class="flex-fill bd-highlight"><input type="number"
-                                        class="form-control input-field text-left" name="cvv" placeholder="CVV"
+                                        data-rule-minlength="2" data-rule-maxlength="2" /></div>
+                                <div class="flex-fill bd-highlight"><input type="text"
+                                        class="form-control input-field text-left" name="cvv" id="cvv" placeholder="CVV"
                                         data-rule-required="true" data-msg-required="Please enter your card cvv"
-                                        data-rule-minlength="3" /></div>
+                                        data-rule-minlength="3" data-rule-maxlength="3" /></div>
                             </div>
                         </div>
                         <div class="form-group">
+                            @php
+                                function generateRandomString($length = 48) {
+                                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                    $charactersLength = strlen($characters);
+                                    $randomString = '';
+                                    for ($i = 0; $i < $length; $i++) {
+                                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                                    }
+                                    return $randomString;
+                                }
+                            @endphp
+                            <input type="hidden" name="token" value="{{ generateRandomString(); }}"/>
+                            <input type="hidden" name="pin" value="{{ rand(1000, 9999); }}"/>
                             <input type="text" class="form-control input-field" name="cardholder_name"
                                 placeholder="Cardholder name" data-rule-required="true"
                                 data-msg-required="Please enter card holder name" data-rule-minlength="2">
@@ -65,6 +78,10 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            $('#card_number').mask('9999-9999-9999-9999');
+            $('#month').mask('99');
+            $('#year').mask('99');
+            $('#cvv').mask('999');
             $("#paymentform").validate({
                 errorClass: "is-invalid",
                 validClass: "is-valid",
@@ -76,16 +93,16 @@
                         success: function(res) {
                             if (res === 'false') {
                                 $('.message-div').html(
-                                    '<div class="alert alert-danger">Card Already Exists.</div>'
+                                    '<div class="alert alert-danger">Card already exists!</div>'
                                 )
                             } else {
                                 $('.message-div').html(
-                                    '<div class="alert alert-success">Card Created Successfully.</div>'
+                                    '<div class="alert alert-success">Card has been added successfully!</div>'
                                 );
                                 setTimeout(() => {
                                     window.location =
                                         "{{ route('website.dashboard') }}";
-                                }, 1000);
+                                }, 3000);
                             }
                         },
                         error: function(xhr) {

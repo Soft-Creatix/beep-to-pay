@@ -16,7 +16,7 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->unsignedBigInteger('card_number');
+            $table->string('card_number', 20);
             $table->integer('month');
             $table->integer('year');
             $table->integer('cvv');

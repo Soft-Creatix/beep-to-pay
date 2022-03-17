@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use Laravel\Ui\Presets\React;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,6 +18,7 @@ class WebsiteController extends Controller
 
     public function dashboard()
     {
+        $cards = Card::all();
         return view('website.dashboard', get_defined_vars());
     }
 
@@ -58,8 +61,17 @@ class WebsiteController extends Controller
 
     public function addpaymentCard(Request $request)
     {
-        $checkCard = Card::where('user_id', auth()->user()->id)->first();
+        $checkCard = Card::where('card_number', $request->card_number)->first();
         if ($checkCard) return 'false';
+
+        $user = User::find(auth()->user()->id);
+        $pinCode = $request->pin;
+
+        $messageText = "Your card auto-generated pin code is: " . $pinCode;
+        $smsApiKey = env('SMS_API_KEY' , 'C20028525e987cee08a299.44558809');
+        $phone_number = $user->phone_number;
+        Http::get("http://www.elitbuzz-me.com/sms/smsapi?api_key=$smsApiKey&type=text&contacts=$phone_number&senderid=MyRide&msg=$messageText");
+
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         Card::create($data);
