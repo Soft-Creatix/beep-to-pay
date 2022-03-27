@@ -72,7 +72,7 @@ class RegisterController extends Controller
         $dob = Carbon::parse($data['dob']);
         $dob = $dob->format('Y-m-d');
 
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
@@ -81,6 +81,10 @@ class RegisterController extends Controller
             'dob' => $dob,
             'gender' => Hash::make($data['gender']),
         ]);
+
+        $user->assignRole('Customer');
+
+        return $user;
     }
 
     public function showRegistrationForm()

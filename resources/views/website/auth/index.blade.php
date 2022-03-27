@@ -26,7 +26,7 @@
                             </button>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('login') }}" id="loginForm">
+                    <form method="POST" action="{{ route('website.login') }}" id="loginForm">
                         @csrf
                         <div class="form-group">
                             <input type="email" name="email" value="{{ old('email') }}" class="form-control input-field"

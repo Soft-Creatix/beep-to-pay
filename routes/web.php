@@ -31,11 +31,11 @@ Route::get('/', function () {
 });
 
 // Registration Routes...
-Route::get('register', [App\Http\Controllers\Website\Auth\RegisterController::class, 'showRegistrationForm'])->name('website.register');
+Route::get('register', [App\Http\Controllers\Website\Auth\RegisterController::class, 'showRegistrationForm'])->name('website.register.show');
 Route::post('register', [App\Http\Controllers\Website\Auth\RegisterController::class, 'register'])->name('website.register');
 
 // Authentication Routes...
-Route::get('login', [App\Http\Controllers\Website\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::get('login', [App\Http\Controllers\Website\Auth\LoginController::class, 'showLoginForm'])->name('website.login.show');
 Route::post('login', [App\Http\Controllers\Website\Auth\LoginController::class, 'login'])->name('website.login');
 
 // Logout Route
@@ -57,3 +57,20 @@ Route::get('delete-card/{id}', [App\Http\Controllers\Website\WebsiteController::
 Route::get('receipt', [App\Http\Controllers\Website\WebsiteController::class, 'receipt'])->name('website.receipt');
 Route::get('spinner', [App\Http\Controllers\Website\WebsiteController::class, 'spinner'])->name('website.spinner');
 Route::get('confirm-info', [App\Http\Controllers\Website\WebsiteController::class, 'confirmInfo'])->name('website.confirm-info');
+
+/* Portal Routes */
+Route::group(['prefix' => 'portal'], function () {
+    Auth::routes();
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::group(['middleware' => ['role:Super Admin']], function () {
+        //Manage Access Routes
+        Route::resource('role', App\Http\Controllers\Admin\RoleController::class)->except(['show']);
+        Route::resource('permission', App\Http\Controllers\Admin\PermissionController::class)->except(['show']);
+        Route::resource('role-permissions', App\Http\Controllers\Admin\RolePermissionsController::class)->except(['create', 'store', 'show', 'destroy']);
+        Route::resource('user-role', App\Http\Controllers\Admin\UserRoleController::class)->except(['create', 'store', 'show', 'destroy']);
+        Route::resource('user-permissions', App\Http\Controllers\Admin\UserPermissionsController::class)->except(['create', 'store', 'show', 'destroy']);
+        Route::resource('user', App\Http\Controllers\Admin\UserController::class)->except(['show']);
+    });
+});
