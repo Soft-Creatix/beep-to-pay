@@ -49,12 +49,8 @@ class MasterCardPaymentController extends Controller
         return json_decode($response);
     }
 
-    public function tokenize(Request $request)
+    public function tokenize($card_number, $card_expiry_month, $card_expiry_year)
     {
-        $card_number = $request->card_number;
-        $card_expiry_month = $request->card_expiry_month;
-        $card_expiry_year = $request->card_expiry_year;
-
         $payload = '{
             "sourceOfFunds": {
                 "provided": {
@@ -75,9 +71,8 @@ class MasterCardPaymentController extends Controller
         return $response;
     }
 
-    public function authorizePayment(Request $request)
+    public function authorizePayment($card_token)
     {
-        $card_token = $request->card_token;
         $order_id = 'ORDER_ID_' .  substr(sha1(rand()), 24);
         $transaction_id = 'TRANSACTION_ID_' .  substr(sha1(rand()), 24);
 
@@ -93,28 +88,6 @@ class MasterCardPaymentController extends Controller
             },
             "transaction": {
                 "reference": "Authorization hold for card token: '. substr($card_token, 12) . '"
-            }
-        }';
-
-        $response = $this->curlRequest('order/'. $order_id .'/transaction' . '/' . $transaction_id, $payload, 'PUT');
-
-        return $response;
-    }
-
-    public function capturePayment(Request $request)
-    {
-        $card_token = $request->card_token;
-        $order_id = 'ORDER_ID_' .  substr(sha1(rand()), 24);
-        $transaction_id = 'TRANSACTION_ID_' .  substr(sha1(rand()), 24);
-
-        $payload = '{
-            "apiOperation": "CAPTURE",
-            "sourceOfFunds": {
-                "token": "'. $card_token .'"
-            },
-            "transaction": {
-                "amount": "1",
-                "currency": "BND"
             }
         }';
 
@@ -150,4 +123,27 @@ class MasterCardPaymentController extends Controller
         return $response;
     }
 
+    /*
+    public function capturePayment(Request $request)
+    {
+        $card_token = $request->card_token;
+        $order_id = 'ORDER_ID_' .  substr(sha1(rand()), 24);
+        $transaction_id = 'TRANSACTION_ID_' .  substr(sha1(rand()), 24);
+
+        $payload = '{
+            "apiOperation": "CAPTURE",
+            "sourceOfFunds": {
+                "token": "'. $card_token .'"
+            },
+            "transaction": {
+                "amount": "1",
+                "currency": "BND"
+            }
+        }';
+
+        $response = $this->curlRequest('order/'. $order_id .'/transaction' . '/' . $transaction_id, $payload, 'PUT');
+
+        return $response;
+    }
+    */
 }

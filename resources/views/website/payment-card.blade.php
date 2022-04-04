@@ -19,7 +19,7 @@
                         Your account has been created. Add your debit or credit card to start using Beep To Pay
                     </p>
                     <div class="message-div"></div>
-                    <form action="javascript:;" class="mt-5 w-60" method="post" id="paymentform"
+                    <form action="javascript:;" class="mt-2 w-60" method="post" id="paymentform"
                         onsubmit="return false">
                         @csrf
                         <h4 class="font_16 font-weight-bold">Add Debit or Credit Card!</h4>
@@ -29,7 +29,7 @@
                                 data-msg-required="Please enter your card number">
                         </div>
                         <div class="form-group">
-                            <div class="d-flex bd-highlight w-90">
+                            <div class="d-flex bd-highlight w-100">
                                 <div class="pr-3 flex-fill bd-highlight"><input type="text"
                                         class="form-control input-field text-left" name="month" id="month" placeholder="MM"
                                         data-rule-required="true" data-msg-required="Please enter card month"
@@ -45,25 +45,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @php
-                                function generateRandomString($length = 48) {
-                                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                                    $charactersLength = strlen($characters);
-                                    $randomString = '';
-                                    for ($i = 0; $i < $length; $i++) {
-                                        $randomString .= $characters[rand(0, $charactersLength - 1)];
-                                    }
-                                    return $randomString;
-                                }
-                            @endphp
-                            <input type="hidden" name="token" value="{{ generateRandomString(); }}"/>
-                            <input type="hidden" name="pin" value="{{ rand(1000, 9999); }}"/>
                             <input type="text" class="form-control input-field" name="cardholder_name"
                                 placeholder="Cardholder name" data-rule-required="true"
-                                data-msg-required="Please enter card holder name" data-rule-minlength="2">
+                                data-msg-required="Please enter card holder name" data-rule-minlength="2" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-field" name="pin" id="pin" data-rule-required="true"
+                            placeholder="Card pin" data-msg-required="Please enter card pin" data-rule-minlength="4" data-rule-maxlength="4" />
                         </div>
                         <div class="form-group text-center mt-4">
-
                             <button type="submit" class="btn-royalblue">Save
                                 Card</button>
                         </div>
@@ -82,6 +72,7 @@
             $('#month').mask('99');
             $('#year').mask('99');
             $('#cvv').mask('999');
+            $('#pin').mask('9999');
             $("#paymentform").validate({
                 errorClass: "is-invalid",
                 validClass: "is-valid",
@@ -94,6 +85,11 @@
                             if (res === 'false') {
                                 $('.message-div').html(
                                     '<div class="alert alert-danger">Card already exists!</div>'
+                                )
+                            }
+                            else if (res === 'invalid') {
+                                $('.message-div').html(
+                                    '<div class="alert alert-danger">Card details are invalid!</div>'
                                 )
                             } else {
                                 $('.message-div').html(
