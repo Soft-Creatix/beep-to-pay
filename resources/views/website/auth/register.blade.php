@@ -98,7 +98,7 @@
                             <input type="submit" class="btn-royalblue" value="Register Now" />
                         </div>
                         <div class="form-group text-center">
-                            <a href="{{ route('login') }}" class="royal-blue font_16">Cancel and return</a>
+                            <a href="{{ route('website.login.show') }}" class="royal-blue font_16">Cancel and return</a>
                         </div>
                     </form>
                 </div>
