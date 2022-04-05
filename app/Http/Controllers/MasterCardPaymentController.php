@@ -49,7 +49,7 @@ class MasterCardPaymentController extends Controller
         return json_decode($response);
     }
 
-    public function tokenize($card_number, $card_expiry_month, $card_expiry_year)
+    public function tokenize($cardholder_name, $card_number, $card_expiry_month, $card_expiry_year, $card_cvc)
     {
         $payload = '{
             "sourceOfFunds": {
@@ -59,13 +59,19 @@ class MasterCardPaymentController extends Controller
                             "month": "'. $card_expiry_month .'",
                             "year": "'. $card_expiry_year.'"
                         },
-                        "number": "'. $card_number .'"
+                        "number": "'. $card_number .'",
+                        "nameOnCard": "'. $cardholder_name .'",
+                        "securityCode": "'. $card_cvc .'"
                     }
                 },
                 "type": "CARD"
-            }
+            },
+            "transaction": {
+                "currency": "BND"
+            },
+            "verificationStrategy": "BASIC"
         }';
-
+        // ACQUIRER
         $response = $this->curlRequest('token', $payload, 'POST');
 
         return $response;

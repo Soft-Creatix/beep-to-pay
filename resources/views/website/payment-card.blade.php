@@ -39,8 +39,8 @@
                                         data-rule-required="true" data-msg-required="Please enter your card year"
                                         data-rule-minlength="2" data-rule-maxlength="2" /></div>
                                 <div class="flex-fill bd-highlight"><input type="text"
-                                        class="form-control input-field text-left" name="cvv" id="cvv" placeholder="CVV"
-                                        data-rule-required="true" data-msg-required="Please enter your card cvv"
+                                        class="form-control input-field text-left" name="cvv" id="cvv" placeholder="CVC"
+                                        data-rule-required="true" data-msg-required="Please enter your card cvc"
                                         data-rule-minlength="3" data-rule-maxlength="3" /></div>
                             </div>
                         </div>
@@ -82,6 +82,7 @@
                         url: "{{ route('website.add-payment-card') }}",
                         data: $(form).serialize(),
                         success: function(res) {
+                            // return 'yes';
                             if (res === 'false') {
                                 $('.message-div').html(
                                     '<div class="alert alert-danger">Card already exists!</div>'

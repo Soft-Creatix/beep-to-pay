@@ -69,8 +69,8 @@ class WebsiteController extends Controller
         $data['user_id'] = auth()->user()->id;
 
         $masterCardController = new MasterCardPaymentController();
-        $cardTokenResponse = $masterCardController->tokenize(str_replace('-', '', $data['card_number']), $data['month'], $data['year']);
-
+        $cardTokenResponse = $masterCardController->tokenize($data['cardholder_name'], str_replace('-', '', $data['card_number']), $data['month'], $data['year'], $data['cvv']);
+        // return $cardTokenResponse;
         if($cardTokenResponse->result == 'SUCCESS' && (isset($cardTokenResponse->status) && $cardTokenResponse->status == 'VALID')) {
             $data['token'] = $cardTokenResponse->token;
             $masterCardController->authorizePayment($data['token']);
