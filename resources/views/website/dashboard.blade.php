@@ -30,7 +30,7 @@
 
                                     <div>
                                         <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
-                                        <p class="font_18 text-white">{{ str_pad(substr($card->card_number, 12, 4), 20, '*', STR_PAD_LEFT) }}</p>
+                                        <p class="font_18 text-white">{{ str_pad(substr($card->card_number, 15, 4), 20, '*', STR_PAD_LEFT) }}</p>
                                     </div>
                                 </div>
                                 <div class="mt-2">

@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'identity_card' => $data['identity_card'],
             'dob' => $dob,
-            'gender' => Hash::make($data['gender']),
+            'gender' => $data['gender'],
         ]);
 
         $user->assignRole('Customer');
