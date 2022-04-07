@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="mt-2">
                                     <a href="{{ route('website.delete-card', $card->id) }}"
-                                        onclick="return confirm('Confirm delete card?')" class="btn-red">Remove
+                                        onclick="return confirm('Confirm delete card?')" class="btn-del btn-red">Remove
                                         Card</a>
                                 </div>
                             </div>
