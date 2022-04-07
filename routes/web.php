@@ -52,7 +52,7 @@ Route::get('dashboard', [App\Http\Controllers\Website\WebsiteController::class, 
 Route::get('success', [App\Http\Controllers\Website\WebsiteController::class, 'success'])->name('website.success');
 Route::get('payment-card', [App\Http\Controllers\Website\WebsiteController::class, 'paymentCard'])->name('website.payment-card');
 Route::post('payment-card', [App\Http\Controllers\Website\WebsiteController::class, 'addpaymentCard'])->name('website.add-payment-card');
-Route::get('remove-card', [App\Http\Controllers\Website\WebsiteController::class, 'removeCard'])->name('website.remove-card');
+Route::get('remove-card/{id}', [App\Http\Controllers\Website\WebsiteController::class, 'removeCard'])->name('website.remove-card');
 Route::get('delete-card/{id}', [App\Http\Controllers\Website\WebsiteController::class, 'deleteCard'])->name('website.delete-card');
 Route::get('receipt', [App\Http\Controllers\Website\WebsiteController::class, 'receipt'])->name('website.receipt');
 Route::get('spinner', [App\Http\Controllers\Website\WebsiteController::class, 'spinner'])->name('website.spinner');

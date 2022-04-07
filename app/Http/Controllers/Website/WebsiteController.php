@@ -33,9 +33,9 @@ class WebsiteController extends Controller
         return view('website.payment-card');
     }
 
-    public function removeCard()
+    public function removeCard($id)
     {
-        $card = Card::where('user_id', auth()->user()->id)->first();
+        $card = Card::where('id', $id)->first();
         return view('website.remove-card', get_defined_vars());
     }
 

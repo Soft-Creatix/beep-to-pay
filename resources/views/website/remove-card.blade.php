@@ -22,11 +22,11 @@
                                 <img src="{{ asset('website/images/card__box.png') }}" class="img-fluid card-img" alt="">
                                 <div class="card-absolute">
                                     <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
-                                    <p class="font_18 text-white">Muhammad ***</p>
+                                    <p class="font_18 text-white">{{ str_pad(substr($card->cardholder_name, 0, 6), 12, '*', STR_PAD_RIGHT) }}<p>
 
                                     <div>
                                         <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
-                                        <p class="font_18 text-white">**** 0123</p>
+                                        <p class="font_18 text-white">{{ str_pad(substr($card->card_number, 15, 4), 20, '*', STR_PAD_LEFT) }}</p>
                                     </div>
                                 </div>
                                 <div class="mt-2">

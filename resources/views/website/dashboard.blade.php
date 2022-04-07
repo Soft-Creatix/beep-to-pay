@@ -19,38 +19,36 @@
 
                     <h3 class="font_16 font-weight-bold mt-3">My Cards</h3>
                     @if(count($cards))
-                    @foreach ($cards as $card)
-                    <div class="row mt-3">
-                        <div class="col-6">
-                            <div class="text-left position-relative">
-                                <img src="{{ asset('website/images/card__box.png') }}" class="img-fluid card-img" alt="">
-                                <div class="card-absolute">
-                                    <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
-                                    <p class="font_18 text-white">{{ str_pad(substr($card->cardholder_name, 0, 6), 12, '*', STR_PAD_RIGHT) }}<p>
-
-                                    <div>
+                        @foreach ($cards as $card)
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <div class="text-left position-relative">
+                                    <img src="{{ asset('website/images/card__box.png') }}" class="img-fluid card-img" alt="">
+                                    <div class="card-absolute">
                                         <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
-                                        <p class="font_18 text-white">{{ str_pad(substr($card->card_number, 15, 4), 20, '*', STR_PAD_LEFT) }}</p>
+                                        <p class="font_18 text-white">{{ str_pad(substr($card->cardholder_name, 0, 6), 12, '*', STR_PAD_RIGHT) }}<p>
+
+                                        <div>
+                                            <h5 class="font_18 font-weight-bold text-white">Cardholder Name</h5>
+                                            <p class="font_18 text-white">{{ str_pad(substr($card->card_number, 15, 4), 20, '*', STR_PAD_LEFT) }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <a href="{{ route('website.remove-card', $card->id) }}" class="btn-del btn-red">Remove Card</a>
                                     </div>
                                 </div>
-                                <div class="mt-2">
-                                    <a href="{{ route('website.delete-card', $card->id) }}"
-                                        onclick="return confirm('Confirm delete card?')" class="btn-del btn-red">Remove
-                                        Card</a>
+                            </div>
+                            <div class="col-6 add-card">
+                                <div>
+                                    <a href="{{ route('website.payment-card') }}" class="button-unset">
+                                        <img src="{{ asset('website/images/add.png') }}" class="img-fluid" alt="">
+                                        <br>
+                                        <span class="font_14 greyee">Add new card</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 add-card">
-                            <div>
-                                <a href="{{ route('website.payment-card') }}" class="button-unset">
-                                    <img src="{{ asset('website/images/add.png') }}" class="img-fluid" alt="">
-                                    <br>
-                                    <span class="font_14 greyee">Add new card</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                        @endforeach
                     @else
                     <div class="row mt-3">
                         <div class="col-6">
