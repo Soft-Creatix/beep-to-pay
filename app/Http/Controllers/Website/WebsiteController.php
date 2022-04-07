@@ -19,7 +19,7 @@ class WebsiteController extends Controller
 
     public function dashboard()
     {
-        $cards = Card::all();
+        $cards = Card::where('user_id', auth()->user()->id);
         return view('website.dashboard', get_defined_vars());
     }
 
