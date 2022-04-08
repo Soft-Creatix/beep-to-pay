@@ -49,10 +49,10 @@
                                 placeholder="Cardholder name" data-rule-required="true"
                                 data-msg-required="Please enter card holder name" data-rule-minlength="2" />
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <input type="text" class="form-control input-field" name="pin" id="pin" data-rule-required="true"
                             placeholder="Card pin" data-msg-required="Please enter card pin" data-rule-minlength="4" data-rule-maxlength="4" />
-                        </div>
+                        </div> --}}
                         <div class="form-group text-center mt-4">
                             <button type="submit" class="btn-royalblue">Save
                                 Card</button>
