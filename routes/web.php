@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\MasterCardPaymentController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Website\Auth\ForgotPasswordController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +24,7 @@ Route::get('/date', function () {
 });
 
 /**Playing with master card OAuth */
-Route::get('master-card', [MasterCardPaymentController::class, 'index']);
+Route::get('master-card', [PaymentController::class, 'index']);
 
 Route::get('/', function () {
     return redirect(route('website.login'));

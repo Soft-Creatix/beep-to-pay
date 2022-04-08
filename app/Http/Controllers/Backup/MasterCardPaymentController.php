@@ -13,7 +13,7 @@ use Mastercard\Developer\Encryption\FieldLevelEncryptionConfigBuilder;
 use Mastercard\Developer\Encryption\FieldValueEncoding;
 use Mastercard\Developer\Utils\EncryptionUtils;
 
-class MasterCardPaymentController extends Controller
+class PaymentController extends Controller
 {
     public function authHeaderGenerator() {
         $keypath = 'https://beeptopay.codigostudios.co.uk/BeepToPay-sandbox.p12';

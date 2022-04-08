@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MasterCardPaymentController extends Controller
+class PaymentController extends Controller
 {
     public function curlRequest($requestString = '', $payload = null, $method = 'GET') {
         $env = env('APP_ENV');

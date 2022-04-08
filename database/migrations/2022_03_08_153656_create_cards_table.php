@@ -21,8 +21,7 @@ class CreateCardsTable extends Migration
             $table->integer('year');
             $table->integer('cvv');
             $table->string('cardholder_name', 255);
-            $table->string('token')->nullable();
-            $table->integer('pin')->default(0);
+            $table->text('token')->nullable();
             $table->timestamps();
         });
     }

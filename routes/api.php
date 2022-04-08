@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\MasterCardPaymentController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CardController;
+use App\Http\Controllers\Api\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,28 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('cards', [CardController::class, 'cards']);
+    Route::post('card/verify-pin', [CardController::class, 'verifyCardPin']);
 });
 
-Route::get('/curl', [MasterCardPaymentController::class, 'curlRequest']);
 
+Route::get('/curl', [PaymentController::class, 'curlRequest']);
 
-Route::post('/tokenize', [MasterCardPaymentController::class, 'tokenize']);
-Route::post('/authorizePayment', [MasterCardPaymentController::class, 'authorizePayment']);
+Route::post('/tokenize', [PaymentController::class, 'tokenize']);
+Route::post('/authorizePayment', [PaymentController::class, 'authorizePayment']);
 
 // Testing Routes
-// Route::get('/header', [MasterCardPaymentController::class, 'authHeaderGenerator']);
-// Route::get('/encrypt-api', [MasterCardPaymentController::class, 'encryptData']);
+// Route::get('/header', [PaymentController::class, 'authHeaderGenerator']);
+// Route::get('/encrypt-api', [PaymentController::class, 'encryptData']);
 /* MDES MasterCard Routes */
-// Route::post('/tokenize', [MasterCardPaymentController::class, 'tokenize']);
-// Route::post('/notifyTokenUpdated', [MasterCardPaymentController::class, 'notifyTokenUpdated']);
-// Route::post('/transact', [MasterCardPaymentController::class, 'transact']);
-// Route::get('/getAsset', [MasterCardPaymentController::class, 'getAsset']);
-// Route::post('/suspend', [MasterCardPaymentController::class, 'suspend']);
-// Route::post('/unSuspend', [MasterCardPaymentController::class, 'unSuspend']);
-// Route::post('/delete', [MasterCardPaymentController::class, 'delete']);
-// Route::post('/getTaskStatus', [MasterCardPaymentController::class, 'getTaskStatus']);
-// Route::post('/searchTokens', [MasterCardPaymentController::class, 'searchTokens']);
-// Route::post('/getToken', [MasterCardPaymentController::class, 'getToken']);
+// Route::post('/tokenize', [PaymentController::class, 'tokenize']);
+// Route::post('/notifyTokenUpdated', [PaymentController::class, 'notifyTokenUpdated']);
+// Route::post('/transact', [PaymentController::class, 'transact']);
+// Route::get('/getAsset', [PaymentController::class, 'getAsset']);
+// Route::post('/suspend', [PaymentController::class, 'suspend']);
+// Route::post('/unSuspend', [PaymentController::class, 'unSuspend']);
+// Route::post('/delete', [PaymentController::class, 'delete']);
+// Route::post('/getTaskStatus', [PaymentController::class, 'getTaskStatus']);
+// Route::post('/searchTokens', [PaymentController::class, 'searchTokens']);
+// Route::post('/getToken', [PaymentController::class, 'getToken']);
 

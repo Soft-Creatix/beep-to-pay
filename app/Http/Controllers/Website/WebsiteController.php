@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\MasterCardPaymentController;
+use App\Http\Controllers\PaymentController;
 use App\Models\Card;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
@@ -68,7 +68,7 @@ class WebsiteController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
 
-        $masterCardController = new MasterCardPaymentController();
+        $masterCardController = new PaymentController();
         $cardTokenResponse = $masterCardController->tokenize($data['cardholder_name'], str_replace('-', '', $data['card_number']), $data['month'], $data['year'], $data['cvv']);
         // return $cardTokenResponse;
         if($cardTokenResponse->result == 'SUCCESS' && (isset($cardTokenResponse->status) && $cardTokenResponse->status == 'VALID')) {
