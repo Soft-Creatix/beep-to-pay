@@ -10,7 +10,7 @@ class CardController extends Controller
 {
     public function cards() {
 
-        $cards = Card::with('user')->where('user_id', auth()->user()->id)->get();
+        $cards = Card::where('user_id', auth()->user()->id)->get(['card_number', 'month', 'year', 'cardholder_name',]);
         $responseArray['cards'] = $cards;
 
         return response()->json([

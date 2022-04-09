@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\SMSController;
 use App\Models\Card;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
@@ -72,18 +73,19 @@ class WebsiteController extends Controller
         $cardTokenResponse = $masterCardController->tokenize($data['cardholder_name'], str_replace('-', '', $data['card_number']), $data['month'], $data['year'], $data['cvv']);
         // return $cardTokenResponse;
         if($cardTokenResponse->result == 'SUCCESS' && (isset($cardTokenResponse->status) && $cardTokenResponse->status == 'VALID')) {
-            $data['token'] = $cardTokenResponse->token;
+            $data['token'] = base64_encode($cardTokenResponse->token);
             $masterCardController->authorizePayment($data['token']);
         } else {
             return 'invalid';
         }
 
+        // For sending pin code on sms
         // $user = User::find(auth()->user()->id);
         // $pinCode = $data['pin'];
-        // $messageText = "Your card auto-generated pin code is: " . $pinCode;
-        // $smsApiKey = env('SMS_API_KEY' , 'C20028525e987cee08a299.44558809');
         // $phone_number = $user->phone_number;
-        // Http::get("http://www.elitbuzz-me.com/sms/smsapi?api_key=$smsApiKey&type=text&contacts=$phone_number&senderid=MyRide&msg=$messageText");
+        // $messageText = "Your card auto-generated pin code is: " . $pinCode;
+        // $smsController = new SMSController();
+        // $smsController->sendSMS($phone_number, $messageText);
 
         Card::create($data);
         return 'true';

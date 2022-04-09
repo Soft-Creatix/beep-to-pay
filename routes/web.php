@@ -23,6 +23,21 @@ Route::get('/date', function () {
     return $date;
 });
 
+Route::get('/sms', function () {
+
+    $MESSAGEBIRD_ACCESS_KEY = env('MESSAGEBIRD_ACCESS_KEY', '8BiBZvfIcRJM9XoZNzy2GKSUN');
+    $MESSAGEBIRD_ORIGINATOR = env('MESSAGEBIRD_ORIGINATOR', 'BeeptoPay');
+
+    $MessageBird = new \MessageBird\Client($MESSAGEBIRD_ACCESS_KEY);
+    $Message = new \MessageBird\Objects\Message();
+    $Message->originator = $MESSAGEBIRD_ORIGINATOR;
+    $Message->recipients = array('+923335806128');
+    $Message->body = 'This is a test message';
+
+    $MessageBird->messages->create($Message);
+    return 'true';
+});
+
 /**Playing with master card OAuth */
 Route::get('master-card', [PaymentController::class, 'index']);
 

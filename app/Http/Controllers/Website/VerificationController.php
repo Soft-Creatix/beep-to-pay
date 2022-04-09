@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Http\Controllers\Api\SMSController;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -31,11 +32,11 @@ class VerificationController extends Controller
             $user->phone_otp = $phoneVerificationCode;
             $user->save();
 
-            $messageText = "Your verification code is: " . $phoneVerificationCode;
-            $smsApiKey = env('SMS_API_KEY' , 'C20028525e987cee08a299.44558809');
             $phone_number = $user->phone_number;
+            $messageText = "Your verification code is: " . $phoneVerificationCode;
 
-            Http::get("http://www.elitbuzz-me.com/sms/smsapi?api_key=$smsApiKey&type=text&contacts=$phone_number&senderid=MyRide&msg=$messageText");
+            $smsController = new SMSController();
+            $smsController->sendSMS($phone_number, $messageText);
         }
 
         return view('website.auth.verify');
@@ -65,11 +66,11 @@ class VerificationController extends Controller
         $user->phone_otp = $phoneVerificationCode;
         $user->save();
 
-        $messageText = "Your verification code is: " . $phoneVerificationCode;
-        $smsApiKey = env('SMS_API_KEY' , 'C20028525e987cee08a299.44558809');
         $phone_number = $user->phone_number;
+        $messageText = "Your verification code is: " . $phoneVerificationCode;
 
-        Http::get("http://www.elitbuzz-me.com/sms/smsapi?api_key=$smsApiKey&type=text&contacts=$phone_number&senderid=MyRide&msg=$messageText");
+        $smsController = new SMSController();
+        $smsController->sendSMS($phone_number, $messageText);
 
         return 'true';
     }
