@@ -16,7 +16,7 @@ class CardController extends Controller
         return response()->json([
             'data' => $responseArray,
             'code' => 200,
-            'message' => 'Cards fetched successfully',
+            'message' => 'Cards fetched successfully!',
         ], 200);
     }
 
@@ -40,7 +40,7 @@ class CardController extends Controller
             return response()->json([
                 'data' => [],
                 'code' => 200,
-                'message' => 'Card pin verified successfully',
+                'message' => 'Card pin verified successfully!',
             ], 200);
         } else {
             return response()->json([

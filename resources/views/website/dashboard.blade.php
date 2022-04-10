@@ -13,10 +13,9 @@
         <div class="row">
             <div class="col-12 p-0 mt-5 mb-5">
                 <div class="container form-container" style="padding: 1.5% 10% !important;">
-                    @if (Session::has('message'))
-                        <div class="alert alert-success">{{ Session::get('message') }}</div>
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
-
                     <h3 class="font_16 font-weight-bold mt-3">My Cards</h3>
                     @if(count($cards))
                         @foreach ($cards as $card)

@@ -50,7 +50,7 @@ class VerificationController extends Controller
         if($otp == $user->phone_otp) {
             $user->is_verified = 1;
             $user->save();
-            return redirect(route('website.dashboard'))->with(['success' => 'Your phone number has been verfied successfully']);
+            return redirect(route('website.payment-pin'))->with(['success' => 'Your phone number has been verfied successfully!']);
         } else {
             return redirect(route('website.verification'))->with(['error' => 'You have entered an invalid OTP']);
         }

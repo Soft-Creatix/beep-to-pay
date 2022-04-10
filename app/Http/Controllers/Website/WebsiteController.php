@@ -15,7 +15,7 @@ class WebsiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:web', 'user.verified']);
+        $this->middleware(['auth:web', 'user.verified', 'user.payment.pin']);
     }
 
     public function dashboard()
@@ -43,7 +43,7 @@ class WebsiteController extends Controller
     public function deleteCard($id)
     {
         Card::where('id', $id)->delete();
-        return redirect()->route('website.dashboard')->with('message', 'Card deleted successfully!');
+        return redirect()->route('website.dashboard')->with('success', 'Card deleted successfully!');
     }
 
     public function receipt()
@@ -54,11 +54,6 @@ class WebsiteController extends Controller
     public function spinner()
     {
         return view('website.spinner');
-    }
-
-    public function confirmInfo()
-    {
-        return view('website.confirm-info');
     }
 
     public function addpaymentCard(Request $request)

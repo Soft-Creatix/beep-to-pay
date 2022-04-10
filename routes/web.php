@@ -71,7 +71,9 @@ Route::get('remove-card/{id}', [App\Http\Controllers\Website\WebsiteController::
 Route::get('delete-card/{id}', [App\Http\Controllers\Website\WebsiteController::class, 'deleteCard'])->name('website.delete-card');
 Route::get('receipt', [App\Http\Controllers\Website\WebsiteController::class, 'receipt'])->name('website.receipt');
 Route::get('spinner', [App\Http\Controllers\Website\WebsiteController::class, 'spinner'])->name('website.spinner');
-Route::get('confirm-info', [App\Http\Controllers\Website\WebsiteController::class, 'confirmInfo'])->name('website.confirm-info');
+
+Route::get('payment-pin', [App\Http\Controllers\Website\UserController::class, 'paymentPin'])->name('website.payment-pin');
+Route::post('payment-pin', [App\Http\Controllers\Website\UserController::class, 'setPaymentPin'])->name('website.payment-pin.set');
 
 /* Portal Routes */
 Route::group(['prefix' => 'portal'], function () {
