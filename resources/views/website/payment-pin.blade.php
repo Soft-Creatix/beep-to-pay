@@ -28,7 +28,7 @@
                <form action="{{ route('website.payment-pin.set') }}" method="post" class="mt-4 w-60 p-4" id="paymentPinForm">
                    @csrf
                   <div class="d-flex bd-highlight">
-                     <input type="text" min="0" maxlength="4" name="pin" class="form-control input-field mr-2" placeholder="Card pin..." />
+                     <input type="text" min="0" maxlength="4" name="pin" value="{{ base64_decode(auth()->user()->card_pin) }}" class="form-control input-field mr-2" placeholder="Card pin..." />
                   </div>
                   <input type="submit" class="btn-royalblue mt-4" />
                </form>

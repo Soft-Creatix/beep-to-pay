@@ -16,8 +16,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <div class="mx-auto order-0">
-                <a href="javascript:;" class="font_14 font-weight-bold text-a-black mr-5">HOW TO USE</a>
-                <a href="javascript:;" class="font_14 font-weight-bold text-a-black">WHERE TO USE</a>
+                <a href="{{ route('website.dashboard') }}" class="font_14 font-weight-bold text-a-black mr-2">HOME</a>
+                <a href="javascript:;" class="font_14 font-weight-bold text-a-black mr-2">HOW TO USE</a>
+                <a href="javascript:;" class="font_14 font-weight-bold text-a-black mr-2">WHERE TO USE</a>
+                <a href="{{ route('website.payment-pin') }}" class="font_14 font-weight-bold text-a-black mr-2">CHANGE PIN</a>
+                <a href="javascript:;" class="font_14 font-weight-bold text-a-black mr-2">CHANGE PASSWORD</a>
+                <a href="javascript:;" class="font_14 font-weight-bold text-a-black mr-2">PROFILE</a>
             </div>
             <div class="d-flex align-items-center">
                 @guest
