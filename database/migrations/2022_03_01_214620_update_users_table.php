@@ -18,8 +18,8 @@ class UpdateUsersTable extends Migration
             $table->string('identity_card')->unique()->nullable();
             $table->date('dob')->nullable();
             $table->string('gender')->nullable();
-            $table->integer('card_pin')->default("0")->nullable();
-            $table->string('is_verified')->nullable();
+            $table->string('card_pin')->default("0")->nullable();
+            $table->string('is_verified')->default("0")->nullable();
             $table->string('phone_otp')->nullable();
             $table->dateTime('otp_datetime')->nullable();
         });

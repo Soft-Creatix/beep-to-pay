@@ -36,7 +36,7 @@ class CardController extends Controller
             ]);
         }
 
-        if($user->card_pin == $request->card_pin) {
+        if(base64_decode($user->card_pin) == $request->card_pin) {
             return response()->json([
                 'data' => [],
                 'code' => 200,

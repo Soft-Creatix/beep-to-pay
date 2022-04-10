@@ -18,7 +18,7 @@ class UserVerified
     public function handle(Request $request, Closure $next)
     {
         // !Auth::user()->hasRole('Super Admin')
-        if(Auth::user()->is_verified == null || Auth::user()->is_verified == 0) {
+        if(Auth::user()->is_verified == null || Auth::user()->is_verified == "0") {
             return redirect('/verification');
         }
 

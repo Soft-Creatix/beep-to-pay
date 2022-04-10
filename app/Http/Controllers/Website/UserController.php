@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
-        $pin = $request->pin;
+        $pin = base64_encode($request->pin);
         $user->card_pin = $pin;
         $user->save();
 

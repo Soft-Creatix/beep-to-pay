@@ -18,7 +18,7 @@ class PaymentPin
     public function handle(Request $request, Closure $next)
     {
         // !Auth::user()->hasRole('Super Admin')
-        if(Auth::user()->card_pin == null || Auth::user()->card_pin == 0) {
+        if(Auth::user()->card_pin == null || Auth::user()->card_pin == "0") {
             return redirect('/payment-pin');
         }
 
