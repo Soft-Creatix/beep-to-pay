@@ -56,6 +56,8 @@ Route::post('login', [App\Http\Controllers\Website\Auth\LoginController::class, 
 // Logout Route
 Route::get('logout', [App\Http\Controllers\Website\Auth\LoginController::class, 'logout'])->name('website.logout');
 
+Route::get('change-password', [App\Http\Controllers\Website\UserController::class, 'changePassword'])->name('website.change-password');
+
 // Reset Password Route
 Route::get('password/reset', [App\Http\Controllers\Website\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 

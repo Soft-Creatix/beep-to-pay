@@ -210,6 +210,11 @@ input[type="checkbox"]:checked:before {
     top: 18%;
     right: 7%;
 }
+.absolute-eye {
+    position: absolute;
+    top: 20%;
+    right: 7%;
+}
 .footer-fixed {
     bottom: 0;
     position: fixed;

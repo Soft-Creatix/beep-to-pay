@@ -29,4 +29,10 @@ class UserController extends Controller
 
         return redirect(route('website.dashboard'))->with(['success' => 'Your pin has been setup successfully!']);
     }
+
+    public function changePassword()
+    {
+        return view('website.change-password');
+    }
+
 }
