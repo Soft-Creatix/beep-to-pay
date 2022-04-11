@@ -71,7 +71,7 @@ Route::get('payment-card', [App\Http\Controllers\Website\WebsiteController::clas
 Route::post('payment-card', [App\Http\Controllers\Website\WebsiteController::class, 'addpaymentCard'])->name('website.add-payment-card');
 Route::get('remove-card/{id}', [App\Http\Controllers\Website\WebsiteController::class, 'removeCard'])->name('website.remove-card');
 Route::get('delete-card/{id}', [App\Http\Controllers\Website\WebsiteController::class, 'deleteCard'])->name('website.delete-card');
-Route::get('receipt', [App\Http\Controllers\Website\WebsiteController::class, 'receipt'])->name('website.receipt');
+Route::get('receipt/{transaction_id}', [App\Http\Controllers\Website\WebsiteController::class, 'receipt'])->name('website.receipt');
 Route::get('spinner', [App\Http\Controllers\Website\WebsiteController::class, 'spinner'])->name('website.spinner');
 
 Route::get('payment-pin', [App\Http\Controllers\Website\UserController::class, 'paymentPin'])->name('website.payment-pin');

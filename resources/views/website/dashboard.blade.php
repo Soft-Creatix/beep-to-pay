@@ -12,7 +12,7 @@
     <div class="container mb-5-p">
         <div class="row">
             <div class="col-12 p-0 mt-5 mb-5">
-                <div class="container form-container" style="padding: 1.5% 10% !important;">
+                <div class="container form-container" style="padding: 0.5% 10% !important;">
                     @if(Session::has('success'))
                         <div class="alert alert-success">{{ Session::get('success') }}</div>
                     @endif
@@ -64,77 +64,34 @@
                         </div>
                     </div>
                     @endif
-                   <hr />
-                    <h3 class="font_16 font-weight-bold mt-4">My Transactions</h3>
+                    <hr />
+                    <h3 class="font_16 font-weight-bold mt-2">My Transactions</h3>
+                    <hr />
                 </div>
-                <div class="container grey-container">
+                {{-- <div class="container grey-container">
                     <h5 class="font_12 m-0">MONDAY, 10 JANUARY 2022</h5>
-                </div>
-                <div class="container form-container" style="padding: 1% 10% !important;">
+                </div> --}}
+                <div class="container form-container" style="padding: 0% 10% !important; padding-bottom: 5% !important;">
+                    @if(count($transactions))
+                        @foreach ($transactions as $transaction)
+                            <a href="{{ route('website.receipt', $transaction->id) }}">
+                                <div class="d-flex bd-highlight py-2">
+                                    <div class="bd-highlight">
+                                        <img src="{{ $transaction->vendor_image }}" class="img-fluid res-img" alt="">
+                                    </div>
+                                    <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
+                                        {{ $transaction->vendor_name }}</span></div>
+                                    <div class="bd-highlight text-right jus-center">
+                                        <h5 class="m-0 greyee font_14 font-weight-bold">BND {{ $transaction->total_amount }}</h5>
+                                        <p class="m-0 font_12">{{ $transaction->created_at->format('d-m-Y h:i A') }}</p>
+                                    </div>
 
-                    <a href="{{ route('website.receipt') }}">
-                        <div class="d-flex bd-highlight py-2">
-                            <div class="bd-highlight">
-                                <img src="{{ asset('website/images/res_1.png') }}" class="img-fluid res-img" alt="">
-                            </div>
-                            <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
-                                    Coffee Bean & Tea Leaf</span></div>
-                            <div class="bd-highlight text-right jus-center">
-                                <h5 class="m-0 greyee font_14 font-weight-bold">$6.00</h5>
-                                <p class="m-0 font_12">13:52</p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="{{ route('website.receipt') }}">
-                        <div class="d-flex bd-highlight py-2">
-                            <div class="bd-highlight">
-                                <img src="{{ asset('website/images/res_2.png') }}" class="img-fluid res-img" alt="">
-                            </div>
-                            <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span
-                                    class="font_14 greyee">KFC</span></div>
-                            <div class="bd-highlight text-right jus-center">
-                                <h5 class="m-0 greyee font_14 font-weight-bold">$68.00</h5>
-                                <p class="m-0 font_12">12:52</p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="{{ route('website.receipt') }}">
-                        <div class="d-flex bd-highlight py-2">
-                            <div class="bd-highlight">
-                                <img src="{{ asset('website/images/res_3.png') }}" class="img-fluid res-img" alt="">
-                            </div>
-                            <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">Excapade
-                                    Sushi</span></div>
-                            <div class="bd-highlight text-right jus-center">
-                                <h5 class="m-0 greyee font_14 font-weight-bold">$12.00</h5>
-                                <p class="m-0 font_12">11:02</p>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="container grey-container">
-                    <h5 class="font_12 m-0">SUNDAY, 9 JANUARY 2022</h5>
-                </div>
-                <div class="container form-container" style="padding: 1% 10% !important;">
-
-                    <a href="{{ route('website.receipt') }}">
-                        <div class="d-flex bd-highlight py-2">
-                            <div class="bd-highlight">
-                                <img src="{{ asset('website/images/res_1.png') }}" class="img-fluid res-img" alt="">
-                            </div>
-                            <div class="pl-2 pr-2 flex-grow-1 bd-highlight jus-center"><span class="font_14 greyee">The
-                                    Coffee Bean & Tea Leaf</span></div>
-                            <div class="bd-highlight text-right jus-center">
-                                <h5 class="m-0 greyee font_14 font-weight-bold">$6.00</h5>
-                                <p class="m-0 font_12">13:52</p>
-                            </div>
-
-                        </div>
-                    </a>
-
+                                </div>
+                            </a>
+                        @endforeach
+                    @else
+                        <div>No Transactions Available!</div>
+                    @endif
                 </div>
             </div>
         </div>

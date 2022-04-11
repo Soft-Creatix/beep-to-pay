@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\SMSController;
 use App\Models\Card;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Laravel\Ui\Presets\React;
@@ -21,6 +22,7 @@ class WebsiteController extends Controller
     public function dashboard()
     {
         $cards = Card::where('user_id', auth()->user()->id)->get();
+        $transactions = Transaction::where('user_id', auth()->user()->id)->get();
         return view('website.dashboard', get_defined_vars());
     }
 
@@ -46,9 +48,10 @@ class WebsiteController extends Controller
         return redirect()->route('website.dashboard')->with('success', 'Card deleted successfully!');
     }
 
-    public function receipt()
+    public function receipt($transaction_id)
     {
-        return view('website.receipt');
+        $transaction = Transaction::where('id', $transaction_id)->first();
+        return view('website.receipt', get_defined_vars());
     }
 
     public function spinner()
