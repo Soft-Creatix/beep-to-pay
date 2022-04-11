@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Card;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -103,12 +106,10 @@ class PaymentController extends Controller
         return $response;
     }
 
-    public function transaction(Request $request)
+    public function transaction($card_token, $total_amount, $order_id, $transaction_id)
     {
-        $card_token = $request->card_token;
-        $amount = $request->amount;
-        $order_id = 'ORDER_ID_' .  substr(sha1(rand()), 24);
-        $transaction_id = 'TRANSACTION_ID_' .  substr(sha1(rand()), 24);
+        // $order_id = 'ORDER_ID_' .  substr(sha1(rand()), 24);
+        // $transaction_id = 'TRANSACTION_ID_' .  substr(sha1(rand()), 24);
 
         $payload = '{
             "apiOperation": "PAY",
@@ -116,7 +117,7 @@ class PaymentController extends Controller
                 "token": "'. $card_token .'"
             },
             "order": {
-                "amount": "'. $amount .'",
+                "amount": "'. $total_amount .'",
                 "currency": "BND",
                 "reference": "BEEP-TO-PAY TRANSACTION"
             },
@@ -153,4 +154,51 @@ class PaymentController extends Controller
         return $response;
     }
     */
+
+    public function makePayment(Request $request)
+    {
+        $card_id = $request->card_id;
+        $total_amount = $request->total_amount;
+        $vendor_name = $request->vendor_name;
+        $vendor_image = $request->vendor_image;
+        $user_id = Auth::user()->id;
+        $order_id = $request->order_id;
+        $order_details = $request->order_details;
+        $transaction_id = $request->transaction_id;
+
+        $card = Card::where('id', $card_id)->get(['token'])->first();
+        $card_token = base64_decode($card->token);
+
+        $transactionResponse = $this->transaction($card_token, $total_amount, $order_id, $transaction_id);
+
+        // return $transactionResponse;
+
+        if($transactionResponse->result == 'SUCCESS') {
+            $transactionRecord = Transaction::create([
+                'total_amount' => $total_amount,
+                'vendor_name' => $vendor_name,
+                'vendor_image' => $vendor_image,
+                'user_id' => $user_id,
+                'card_id' => $card_id,
+                'order_id' => $order_id,
+                'order_details' => $order_details,
+                'transaction_details' => json_encode($transactionResponse),
+                'status' => 'Paid'
+            ]);
+
+            $transactionRecord->transaction_details = json_decode($transactionRecord->transaction_details);
+
+            return response()->json([
+                'data' => $transactionRecord,
+                'code' => 200,
+                'message' => 'Your transaction is successful',
+            ], 400);
+        } else {
+            return response()->json([
+                'data' => [],
+                'code' => 400,
+                'message' => 'The transaction is declined',
+            ], 400);
+        }
+    }
 }

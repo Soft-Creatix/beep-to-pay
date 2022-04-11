@@ -9,7 +9,7 @@ class SMSController extends Controller
 {
     public function sendSMS($phone_number, $messageText) {
 
-        $MESSAGEBIRD_ACCESS_KEY = env('MESSAGEBIRD_ACCESS_KEY', '8BiBZvfIcRJM9XoZNzy2GKSUN');
+        $MESSAGEBIRD_ACCESS_KEY = env('MESSAGEBIRD_ACCESS_KEY', 'TBLfg8LlW1ZCw6LZFqCRR1UGn');
         $MESSAGEBIRD_ORIGINATOR = env('MESSAGEBIRD_ORIGINATOR', 'BeepToPay');
 
         $MessageBird = new \MessageBird\Client($MESSAGEBIRD_ACCESS_KEY);

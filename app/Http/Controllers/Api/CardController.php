@@ -10,7 +10,7 @@ class CardController extends Controller
 {
     public function cards() {
 
-        $cards = Card::where('user_id', auth()->user()->id)->get(['card_number', 'month', 'year', 'cardholder_name',]);
+        $cards = Card::where('user_id', auth()->user()->id)->get(['id', 'card_number', 'month', 'year', 'cardholder_name']);
         $responseArray['cards'] = $cards;
 
         return response()->json([
@@ -33,7 +33,7 @@ class CardController extends Controller
                 'data' => [],
                 'code' => 400,
                 'message' => 'The card pin is not being setup',
-            ]);
+            ], 400);
         }
 
         if(base64_decode($user->card_pin) == $request->card_pin) {

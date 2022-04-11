@@ -20,8 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    //Card Routes
     Route::get('cards', [CardController::class, 'cards']);
     Route::post('card/verify-pin', [CardController::class, 'verifyCardPin']);
+
+    //Transaction Routes
+    Route::post('make-payment', [PaymentController::class, 'makePayment']);
 });
 
 
