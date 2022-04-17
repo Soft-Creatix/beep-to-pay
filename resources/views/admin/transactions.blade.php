@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'View Users')
+@section('title', 'View Transaction(s)')
 @push('styles')
     <!--begin::Page Vendors Styles(used by this page)-->
     <link href="{{ asset('admin/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -24,15 +24,12 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h5 class="text-dark font-weight-bold my-1 mr-5">Users</h5>
+                        <h5 class="text-dark font-weight-bold my-1 mr-5">Transaction(s)</h5>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                             <li class="breadcrumb-item text-muted">
-                                <a href="" class="text-muted">Manage Access</a>
-                            </li>
-                            <li class="breadcrumb-item text-muted">
-                                <a href="" class="text-muted">Users</a>
+                                <a href="#" class="text-muted">Home</a>
                             </li>
                         </ul>
                         <!--end::Breadcrumb-->
@@ -78,8 +75,8 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap py-5">
                         <div class="card-title">
-                            <h3 class="card-label">Users
-                            <span class="d-block text-muted pt-2 font-size-sm">list of users</span></h3>
+                            <h3 class="card-label">Transaction(s)
+                            <span class="d-block text-muted pt-2 font-size-sm">list of transaction(s)</span></h3>
                         </div>
                         <div class="card-toolbar">
                             {{-- <!--begin::Dropdown-->
@@ -148,7 +145,7 @@
                             </div>
                             <!--end::Dropdown--> --}}
                             <!--begin::Button-->
-                            <a href="{{ route('user.create') }}" class="btn btn-primary font-weight-bolder">
+                            {{-- <a href="{{ route('role-permissions.create') }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -159,7 +156,7 @@
                                     </g>
                                 </svg>
                                 <!--end::Svg Icon-->
-                            </span>New User</a>
+                            </span>New User Role</a> --}}
                             <!--end::Button-->
                         </div>
                     </div>
@@ -169,33 +166,24 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Contact No.</th>
-                                    <th>Role</th>
-                                    <th>Actions</th>
+                                    <th>Vendor Image</th>
+                                    <th>Vendor Name</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                    <th>Date & Time</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($transactions as $transaction)
                                     <tr>
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ ++$loop->index }}</td>
                                         <td>
-                                            <img src="{{ $user->image ? $user->image->url : asset('admin/assets/media/users/blank.png') }}" class="h-75px align-self-end profile-img-border" alt="">
+                                            <img src="{{ $transaction->vendor_image ? $transaction->vendor_image : asset('admin/assets/media/users/blank.png') }}" class="h-75px align-self-end profile-img-border" alt="">
                                         </td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->contact_no }}</td>
-                                        <td>{{ $user->roles ? $user->roles[0]->name : 'N/A' }}</td>
-                                        <td nowrap="nowrap">
-                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
-                                                <a class="btn btn-warning" href="{{ route('admin.cards', $user->id) }}"><i class="flaticon2-website"></i> Cards</a>
-                                                <a class="btn btn-success" href="{{ route('admin.transactions', $user->id) }}"><i class="flaticon-business"></i> Transactions</a>
-                                                <a class="btn btn-primary" href="{{ route('user.edit', $user->id) }}"><i class="flaticon-edit"></i> Edit</a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger mr-4"><i class="flaticon-delete"></i> Delete</button>
-                                            </form>
-                                        </td>
+                                        <td>{{ $transaction->vendor_name }}</td>
+                                        <td>BND {{ $transaction->total_amount }}</td>
+                                        <td>{{ $transaction->status }}</td>
+                                        <td>{{ $transaction->created_at->format('d-m-Y h:i A') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

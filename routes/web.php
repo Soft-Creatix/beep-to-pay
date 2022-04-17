@@ -82,6 +82,8 @@ Route::group(['prefix' => 'portal'], function () {
     Auth::routes();
     Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/dashboard', [App\Http\Controllers\Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/cards/{user_id?}', [App\Http\Controllers\Admin\HomeController::class, 'cards'])->name('admin.cards');
+    Route::get('/transactions/{user_id?}', [App\Http\Controllers\Admin\HomeController::class, 'transactions'])->name('admin.transactions');
 
     Route::group(['middleware' => ['role:Super Admin']], function () {
         //Manage Access Routes
