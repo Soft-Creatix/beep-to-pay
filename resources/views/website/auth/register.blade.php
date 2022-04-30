@@ -107,7 +107,26 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
+@push('scripts')
+<script>
+        $(document).ready(function() {
+            $('#name').mask('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', {
+                translation: {
+                'Z': {
+                        pattern: /[a-zA-Z- ]/
+                    }
+                }
+            });
+
+            $('#phone').mask('ZZZZZZZZZZZZZZZ', {
+                translation: {
+                'Z': {
+                        pattern: /[+0-9]/
+                    }
+                }
+            });
+        });
+
         function myFunction() {
             var x = document.getElementById("myInput");
             if (x.type === "password") {
