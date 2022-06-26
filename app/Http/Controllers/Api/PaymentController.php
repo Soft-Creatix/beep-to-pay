@@ -171,7 +171,7 @@ class PaymentController extends Controller
 
         $transactionResponse = $this->transaction($card_token, $total_amount, $order_id, $transaction_id);
 
-        // return $transactionResponse;
+        return response()->json(['data' => $transactionResponse]);
 
         if($transactionResponse->result == 'SUCCESS') {
             $transactionRecord = Transaction::create([
