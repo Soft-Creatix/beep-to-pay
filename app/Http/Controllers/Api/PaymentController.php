@@ -63,7 +63,7 @@ class PaymentController extends Controller
                             "month": "'. $card_expiry_month .'",
                             "year": "'. $card_expiry_year.'"
                         },
-                        "number": "'. $card_number .'",
+                        "number": "'. str_replace('-', '', $card_number) .'",
                         "nameOnCard": "'. $cardholder_name .'",
                         "securityCode": "'. $card_cvc .'"
                     }
