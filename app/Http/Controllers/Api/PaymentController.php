@@ -119,7 +119,7 @@ class PaymentController extends Controller
             "order": {
                 "amount": "'. $total_amount .'",
                 "currency": "BND",
-                "reference": "BEEP-TO-PAY TRANSACTION"
+                "reference": "BEEP-TO-PAY ORDER: '. $order_id  . '"
             },
             "transaction": {
                 "reference": "BEEP-TO-PAY TRANSACTION: '. $transaction_id  . '"
